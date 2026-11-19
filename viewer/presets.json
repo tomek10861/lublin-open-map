@@ -1,0 +1,17 @@
+{
+  "miasto-z-gory": {"label": "Całe miasto z góry", "x": 350, "y": 0, "dist": 3100, "top": true, "radius": 3600, "photo": false},
+  "stare-miasto-z-gory": {"label": "Stare Miasto z góry", "x": 2380, "y": 40, "dist": 650, "top": true, "radius": 700},
+  "stare-miasto": {"label": "Stare Miasto z lotu ptaka", "x": 2350, "y": 0, "dist": 420, "yaw": 45, "pitch": 32},
+  "brama-krakowska": {"label": "Brama Krakowska", "x": 2219, "y": -60, "dist": 120, "yaw": 80, "pitch": 18},
+  "rynek-trybunal": {"label": "Rynek i Trybunał Koronny", "x": 2307, "y": -16, "dist": 110, "yaw": 60, "pitch": 30},
+  "zamek": {"label": "Zamek Lubelski", "x": 2600, "y": 280, "dist": 230, "yaw": 300, "pitch": 24},
+  "archikatedra": {"label": "Archikatedra i Wieża Trynitarska", "x": 2350, "y": -130, "dist": 160, "yaw": 20, "pitch": 26},
+  "plac-litewski": {"label": "Plac Litewski: Portal, Pomnik Unii", "x": 1765, "y": -30, "dist": 170, "yaw": 340, "pitch": 26},
+  "krakowskie-przedmiescie": {"label": "Krakowskie Przedmieście", "x": 1950, "y": -40, "dist": 380, "yaw": 80, "pitch": 22},
+  "muszla-saski": {"label": "Muszla Koncertowa, Ogród Saski", "x": 788, "y": 141, "dist": 90, "yaw": 340, "pitch": 22},
+  "csk": {"label": "Centrum Spotkania Kultur", "x": 963, "y": -207, "dist": 220, "yaw": 30, "pitch": 24},
+  "umcs-curie": {"label": "Plac Curie-Skłodowskiej, UMCS", "x": 492, "y": -367, "dist": 260, "yaw": 20, "pitch": 26},
+  "wiadukt-solidarnosci": {"label": "Wiadukt, Aleja Solidarności", "x": -251, "y": 1077, "dist": 170, "yaw": 120, "pitch": 12},
+  "cerkiew-warszawska": {"label": "Cerkiew, Aleja Warszawska", "x": -1747, "y": 1081, "dist": 75, "yaw": 0, "pitch": 14},
+  "trasy-wyscigow": {"label": "Trasy wyścigów", "x": 350, "y": 0, "dist": 3100, "top": true, "radius": 3600, "routes": true, "photo": false}
+}

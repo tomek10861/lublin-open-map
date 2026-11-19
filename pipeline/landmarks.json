@@ -1,0 +1,352 @@
+[
+{
+"name": "kamienica Konopniców",
+"x": 2367.0,
+"y": -60.4,
+"score": 8,
+"kind": "building"
+},
+{
+"name": "Wieża Trynitarska",
+"x": 2331.9,
+"y": -103.0,
+"score": 8,
+"kind": "city_gate"
+},
+{
+"name": "Brama Rybna",
+"x": 2302.5,
+"y": 22.2,
+"score": 8,
+"kind": "building"
+},
+{
+"name": "kamienica Chociszewska",
+"x": 2324.6,
+"y": 17.5,
+"score": 8,
+"kind": "yes"
+},
+{
+"name": "kamienica pod lwami",
+"x": 2373.2,
+"y": -21.9,
+"score": 8,
+"kind": "building"
+},
+{
+"name": "Fundamenty Kościoła Farnego",
+"x": 2406.8,
+"y": 85.2,
+"score": 8,
+"kind": "ruins"
+},
+{
+"name": "Brama Grodzka",
+"x": 2439.9,
+"y": 187.5,
+"score": 8,
+"kind": "city_gate"
+},
+{
+"name": "Zamek w Lublinie",
+"x": 2599.7,
+"y": 280.4,
+"score": 8,
+"kind": "castle"
+},
+{
+"name": "Baszta Gotycka",
+"x": 2252.4,
+"y": -106.0,
+"score": 7,
+"kind": "citywalls"
+},
+{
+"name": "Cerkiew pw. Narodzenia Najświętszej Marii Panny",
+"x": -1747.2,
+"y": 1081.2,
+"score": 6,
+"kind": "yes"
+},
+{
+"name": "Kościół Świętej Trójcy",
+"x": 1414.9,
+"y": 24.4,
+"score": 6,
+"kind": "church"
+},
+{
+"name": "Pałac Lubomirskich",
+"x": 1786.1,
+"y": 103.8,
+"score": 6,
+"kind": "castle"
+},
+{
+"name": "Kościół pw. Wniebowzięcia Najświętszej Maryi Panny Zwycięskiej",
+"x": 1919.3,
+"y": -220.7,
+"score": 6,
+"kind": "church"
+},
+{
+"name": "Trybunał Koronny",
+"x": 2307.4,
+"y": -16.0,
+"score": 6,
+"kind": "yes"
+},
+{
+"name": "Kościół pw. Świętego Stanisława Biskupa i Męczenika",
+"x": 2462.6,
+"y": -7.4,
+"score": 6,
+"kind": "church"
+},
+{
+"name": "Archikatedra Świętego Jana Chrzciciela i Świętego Jana Ewangelisty",
+"x": 2369.6,
+"y": -149.4,
+"score": 6,
+"kind": "church"
+},
+{
+"name": "Kościół pw. Nawrócenia Świętego Pawła Apostoła",
+"x": 2109.8,
+"y": -207.9,
+"score": 6,
+"kind": "church"
+},
+{
+"name": "Cerkiew pw. Świętego Jozafata",
+"x": 2009.9,
+"y": 11.8,
+"score": 6,
+"kind": "church"
+},
+{
+"name": "Dworek Kościuszków",
+"x": -1585.5,
+"y": 1244.2,
+"score": 5,
+"kind": "manor"
+},
+{
+"name": "Pomnik Marii Curie-Skłodowskiej",
+"x": 492.4,
+"y": -367.1,
+"score": 5,
+"kind": "artwork"
+},
+{
+"name": "Ławeczka Henryka Raabego",
+"x": 482.0,
+"y": -346.9,
+"score": 5,
+"kind": "artwork"
+},
+{
+"name": "Portal Wilno-Lublin",
+"x": 1751.4,
+"y": -53.0,
+"score": 5,
+"kind": "artwork"
+},
+{
+"name": "Pomnik Unii Lubelskiej",
+"x": 1782.5,
+"y": -11.5,
+"score": 5,
+"kind": "monument"
+},
+{
+"name": "Muzeum Historii Miasta Lublina",
+"x": 2218.8,
+"y": -60.1,
+"score": 5,
+"kind": "museum"
+},
+{
+"name": "Kamienica Archidiakońska 7",
+"x": 2425.9,
+"y": 43.5,
+"score": 5,
+"kind": "building"
+},
+{
+"name": "Lubelska Trasa Podziemna",
+"x": 2316.5,
+"y": -24.4,
+"score": 5,
+"kind": "museum"
+},
+{
+"name": "Głaz Katowski-Kamień Nieszczęścia",
+"x": 2322.1,
+"y": -94.8,
+"score": 5,
+"kind": "attraction"
+},
+{
+"name": "Dom Słów- Izba Drukarstwa",
+"x": 2326.6,
+"y": -204.8,
+"score": 5,
+"kind": "museum"
+},
+{
+"name": "Piwnica pod Fortuną",
+"x": 2355.8,
+"y": 5.7,
+"score": 5,
+"kind": "museum"
+},
+{
+"name": "Muzeum Józefa Czechowicza",
+"x": 2393.1,
+"y": -20.2,
+"score": 5,
+"kind": "museum"
+},
+{
+"name": "Muzeum Narodowe w Lublinie",
+"x": 2565.3,
+"y": 286.1,
+"score": 5,
+"kind": "museum"
+},
+{
+"name": "Wydział Politologii i Dziennikarstwa UMCS",
+"x": -746.9,
+"y": -241.0,
+"score": 4,
+"kind": "university"
+},
+{
+"name": "Kościół pw. Niepokalanego Poczęcia Najświętszej Maryi Panny",
+"x": 464.0,
+"y": -37.5,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół pw. Świętego Krzyża",
+"x": 687.7,
+"y": -188.0,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół pw. Świętego Ducha",
+"x": 2125.1,
+"y": -49.8,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół pw. Świętego Piotra Apostoła",
+"x": 2203.5,
+"y": -169.7,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół pw. Świętych Apostołów Piotra i Pawła",
+"x": 1826.2,
+"y": -58.2,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół pw. Przemienienia Pańskiego",
+"x": 2451.5,
+"y": -426.4,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "dawny kościół reformatów pw. św. Kazimierza",
+"x": 2299.1,
+"y": -459.9,
+"score": 4,
+"kind": "church"
+},
+{
+"name": "Kościół pw. Świętego Eliasza",
+"x": 2239.8,
+"y": 836.3,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół Wolnych Chrześcijan",
+"x": 1962.9,
+"y": 735.1,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół Ewangelicznych Chrześcijan",
+"x": 2021.7,
+"y": 701.6,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół pw. Świętego Wojciecha Biskupa i Męczennika",
+"x": 2477.5,
+"y": 181.0,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kaplica pw. Świętej Trójcy",
+"x": 2663.4,
+"y": 273.4,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Kościół pw. Świętego Mikołaja",
+"x": 2589.3,
+"y": 615.6,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Cerkiew Przemienienia Pańskiego",
+"x": 2709.6,
+"y": 488.8,
+"score": 4,
+"kind": "place_of_worship"
+},
+{
+"name": "Zagroda z Korytkowa Dużego",
+"x": -1856.3,
+"y": 1158.1,
+"score": 3,
+"kind": "building"
+},
+{
+"name": "Kościół Jezusa Chrystusa Świętych w Dniach Ostatnich",
+"x": 1539.4,
+"y": -808.3,
+"score": 3,
+"kind": "place_of_worship"
+},
+{
+"name": "Teatr Stary",
+"x": 2405.6,
+"y": -65.9,
+"score": 3,
+"kind": "theatre"
+},
+{
+"name": "Kościół Adwentystów Dnia Siódmego",
+"x": 1766.1,
+"y": 178.1,
+"score": 3,
+"kind": "place_of_worship"
+}
+]

@@ -1,0 +1,1 @@
+{"coordinateFrame":"local EPSG:2180 minus roi.json originEPSG2180","corners":[{"events":[7001,7003],"name":"Bernardynska to Kozia","centre":[2114,-129],"radiusM":12,"anglesDegrees":[194,107]},{"events":[7002],"name":"north approach to Kozia","centre":[2109,-106],"radiusM":10,"anglesDegrees":[180,287]}]}

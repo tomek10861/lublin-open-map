@@ -1,0 +1,20 @@
+# Release data (published as GitHub Release assets, not in git)
+dist/
+release/
+build/
+
+# Pipeline downloads and intermediates
+venv/
+pipeline/osm-tiles/
+pipeline/nmt-original/
+pipeline/ortho-high/
+pipeline/terrain-build/
+pipeline/city-mesh-2022/
+pipeline/modeled-buildings/
+pipeline/bridge-audit/
+pipeline/*.zip
+pipeline/lublin-buildings-clipped.json
+pipeline/facade-baker
+__pycache__/
+*.pyc
+.DS_Store

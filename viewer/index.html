@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lublin Open Map — podgląd</title>
+<style>
+  :root { color-scheme: light dark; --bg: #9fb7cc; --panel: rgba(255,255,255,.88); --text: #1d2329; }
+  @media (prefers-color-scheme: dark) { :root { --panel: rgba(24,28,32,.88); --text: #e8ecef; } }
+  html, body { margin: 0; height: 100%; background: var(--bg); overflow: hidden; font: 14px/1.4 system-ui, sans-serif; }
+  canvas { display: block; }
+  #ui { position: absolute; top: 12px; left: 12px; background: var(--panel); color: var(--text); padding: 10px 12px;
+        border-radius: 8px; max-width: min(320px, calc(100vw - 48px)); }
+  #ui select, #ui button { font: inherit; margin-top: 6px; }
+  #ui label { display: block; margin-top: 6px; }
+  #status { margin-top: 6px; opacity: .75; }
+  body.clean #ui { display: none; }
+</style>
+</head>
+<body>
+<div id="ui">
+  <strong>Lublin Open Map</strong>
+  <label>Widok <select id="preset"></select></label>
+  <label><input type="checkbox" id="photo" checked> fotogrametria</label>
+  <label><input type="checkbox" id="routes"> trasy wyścigów</label>
+  <div id="status">Ładowanie…</div>
+</div>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="main.js"></script>
+</body>
+</html>
