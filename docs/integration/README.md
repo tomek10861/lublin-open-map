@@ -16,11 +16,6 @@ correct when written; check the current documentation of your tool version.
 | Assetto Corsa | racing sim | one course | [assetto-corsa.md](assetto-corsa.md) |
 | Need for Speed III / High Stakes, Underground 2 (OpenUG2), Trackmania, Euro Truck Simulator 2, Cities: Skylines, Minecraft, X-Plane | classic games | varies | [classic-games.md](classic-games.md) |
 
-## What this map is for
-
-Driving, racing, exploring, building and education. Guides for games built around shooting people
-are intentionally not included: the map shows real, recognisable streets and squares.
-
 ## Common steps
 
 1. **Pick an area.** Small-map engines need a district: `python3 tools/subset.py --data dist

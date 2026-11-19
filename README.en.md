@@ -63,8 +63,6 @@ Size: ≈ 640 MB without photogrammetry, 2.9 GB with it. Format: [docs/format.md
 | [Blender](docs/integration/blender.md), [three.js, Babylon, Cesium](docs/integration/web.md) | [X-Plane](docs/integration/classic-games.md#x-plane), [FlightGear](docs/integration/open-source-games.md#flightgear) | [Cities: Skylines](docs/integration/classic-games.md#cities-skylines), [Minecraft](docs/integration/classic-games.md#minecraft-and-luanti) |
 | [SuperTuxKart, Rigs of Rods, Luanti](docs/integration/open-source-games.md) | | |
 
-The map is for driving, racing, exploring, building and education. Guides for games built around
-shooting people are intentionally not included: the map shows real, recognisable streets and squares.
 
 ### With AI
 

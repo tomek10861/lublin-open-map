@@ -63,9 +63,6 @@ Rozmiar: około 640 MB bez fotogrametrii, 2,9 GB z nią. Opis formatu: [docs/for
 | [Blender](docs/integration/blender.md), [three.js, Babylon, Cesium](docs/integration/web.md) | [X-Plane](docs/integration/classic-games.md#x-plane), [FlightGear](docs/integration/open-source-games.md#flightgear) | [Cities: Skylines](docs/integration/classic-games.md#cities-skylines), [Minecraft](docs/integration/classic-games.md#minecraft-and-luanti) |
 | [SuperTuxKart, Rigs of Rods, Luanti](docs/integration/open-source-games.md) | | |
 
-Mapa służy do jazdy, wyścigów, zwiedzania, budowania i nauki. Celowo nie ma przewodników do gier,
-w których strzela się do ludzi: mapa pokazuje prawdziwe, rozpoznawalne ulice i place.
-
 Przewodniki są po angielsku, żeby mogła z nich korzystać społeczność modderów z całego świata.
 
 ### Z pomocą AI
