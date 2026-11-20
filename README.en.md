@@ -21,6 +21,7 @@ open-source engines, simulators and classic games.
 | ![Concert Shell](screenshots/muszla-saski.jpg) **Concert Shell, Saxon Garden** | ![CSK](screenshots/csk.jpg) **Centre for the Meeting of Cultures** |
 | ![Curie Square](screenshots/umcs-curie.jpg) **Maria Curie-Skłodowska Square, UMCS** | ![Viaduct](screenshots/wiadukt-solidarnosci.jpg) **Viaduct on Solidarności Avenue** |
 | ![Orthodox church](screenshots/cerkiew-warszawska.jpg) **Orthodox church by Warszawska Avenue** (Open-Air Village Museum) | ![Old Town top view](screenshots/stare-miasto-z-gory.jpg) **Old Town, top view** |
+| ![Lipowa street cemetery](screenshots/cmentarz-lipowa.jpg) **Lipowa street cemetery** (procedural graves) | |
 | ![Whole area](screenshots/miasto-z-gory.jpg) **The whole map** (≈ 4.9 × 3.5 km) | ![Race courses](screenshots/trasy-wyscigow.jpg) **Four race courses** (3.5–5.5 km) |
 
 Screenshots are rendered from the release data with the repository's three.js viewer (`viewer/`)
@@ -30,14 +31,14 @@ by `tools/screenshots.cjs`.
 
 | Part | Content |
 |---|---|
-| `city/` | 88 cells of 512 m: terrain with orthophoto, streets (asphalt, setts on pedestrian streets, paving slabs), LoD2 buildings, viaducts and footbridges, city gates with arches, Concert Shell, CSK, Portal, monuments, cranes, street-name plates, **13,606 trees and signs** as separate breakable objects |
-| `photo/` | 122 photogrammetry tiles (2022) of the centre, with buildings rebuilt from LoD2 and textured from the photos |
+| `city/` | 88 cells of 512 m: terrain with orthophoto, streets (asphalt, setts on pedestrian streets, paving slabs), LoD2 buildings, viaducts and footbridges, city gates with arches, Concert Shell, CSK, Portal, monuments, the Lipowa street cemetery and the other Christian cemeteries (alleys, graves, walls), cranes, street-name plates, **14,388 trees and signs** as separate breakable objects |
+| `photo/` | 122 photogrammetry tiles (2022) of the centre, with buildings rebuilt from LoD2 and textured from the photos; buildings newer than LoD2 (from OpenStreetMap) as LoD1 blocks |
 | `collision/` | collision meshes: drivable surfaces and walls (buildings, viaduct parapets, landmark outlines) |
 | `races/` | barriers and markers for the four race courses |
 | `layers/` | GeoJSON: 428 named streets, 3,568 traffic lanes, 4 race courses, trees and signs, 50 landmarks, 7,937 building footprints with heights |
 | `terrain/` | 16-bit heightmap, 5 m per pixel |
 
-Size: ≈ 640 MB without photogrammetry, 2.9 GB with it. Format: [docs/format.md](docs/format.md).
+Size: ≈ 690 MB without photogrammetry, 2.1 GB with it. Format: [docs/format.md](docs/format.md).
 
 ## Quick start
 
@@ -86,7 +87,14 @@ The whole pipeline (downloading GUGiK, OSM and city mesh data, building the city
   determined.
 - A few photogrammetry fragments float in the air in the Old Town (near the Trinitarian Tower and
   Jezuicka street).
-- Cranes were placed where the 2022 mesh showed crane jibs; they may be gone today.
+- Cranes: two at the Rezydencja Ogród Saski construction site (started March 2022), confirmed
+  by sources and measured in the 2022 mesh; the building was handed over in 2024.
+- Buildings newer than LoD2 (OpenStreetMap outlines) are simple LoD1 blocks with the roof height
+  measured in the 2022 mesh and photo colour; canopies (`building=roof`) are a roof on posts.
+- Cemetery graves are procedural: outlines, alleys and walls come from OSM, while grave positions
+  and forms do not match the real plots. The forms (cast-iron and stone crosses, obelisks, steles,
+  broken columns, sarcophagi, figures) follow descriptions of the Lipowa cemetery's funerary art.
+  Jewish cemeteries were not modelled.
 - Outside the photogrammetry zone, buildings are LoD2 blocks with procedural facades.
 - Viaduct heights come from the surface model and may be off by a few tens of centimetres.
 

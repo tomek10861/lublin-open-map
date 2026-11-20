@@ -2,7 +2,7 @@
 
 [English version](LICENSES.en.md)
 
-Stan sprawdzenia: **2026-11-19**. Zestawienie warunków opublikowanych przez dostawców danych,
+Stan sprawdzenia: **2026-11-20**. Zestawienie warunków opublikowanych przez dostawców danych,
 nie porada prawna.
 
 ## Podsumowanie
@@ -68,7 +68,8 @@ udostępnione przez urząd, także w jego systemach teleinformatycznych, można 
 (m.in. prawa osób trzecich i dane osobowe).
 
 Pochodzą z niej: `photo/` (kafle fotogrametrii, z budynkami odbudowanymi z LoD2 i oteksturowanymi
-rzutem siatki) oraz pozycje i wysokości żurawi w `city/`.
+rzutem siatki), wysokości dachów i kolory brył LoD1 (budynki nowsze niż LoD2) oraz wysokości
+żurawi w `city/`.
 
 **Usuniemy te warstwy niezwłocznie na żądanie Urzędu Miasta Lublin lub uprawnionego podmiotu.**
 Kontakt w sprawie siatki po stronie miasta: Referat ds. Systemów Geoprzestrzennych,
@@ -79,8 +80,13 @@ Kontakt w sprawie siatki po stronie miasta: Referat ds. Systemów Geoprzestrzenn
 
 Proceduralne modele i tekstury tego projektu (bramy z przejazdami, wiadukty z filarami, kładki,
 Muszla Koncertowa w Ogrodzie Saskim, fasada CSK, Portal Wilno-Lublin, obelisk Unii Lubelskiej,
-pomnik Curie-Skłodowskiej, żurawie, ławki, drzewa, znaki, nawierzchnie, fasady) są na MIT.
-Ich położenie i wymiary pochodzą z danych GUGiK i OSM.
+pomnik Curie-Skłodowskiej, żurawie, ławki, drzewa, znaki, nawierzchnie, fasady, nagrobki, mury
+i ogrodzenia cmentarzy) są na MIT. Ich położenie i wymiary pochodzą z danych GUGiK i OSM;
+nagrobki rozmieszczono proceduralnie wewnątrz obrysów cmentarzy z OSM.
+
+Formy nagrobków wzorowano na opisach (bez kopiowania zdjęć ani tekstów):
+[Plastyka nagrobków](https://lipowa.cmentarz.lublin.pl/wazne-miejsca/plastyka-nagrobkow/)
+(cmentarz przy ul. Lipowej) i [Style i formy](https://dormitorium.lublin.pl/28/style-i-formy.htm).
 
 ## Czego nie ma w tym repozytorium
 

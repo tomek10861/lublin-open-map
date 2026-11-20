@@ -26,7 +26,7 @@ ATLAS = 4096                    # LOD A atlas; LOD C gets a 512 downsample
 ATLAS_C = 512
 MIN_TEXEL_M = .04
 PAD = 2
-VERSION = 16
+VERSION = 17
 MIN_FACE_HIT = .10            # below this a face has no usable photo (party wall/occluded): building's mean colour
 ROUTE_BUFFER_M = 40.0         # (kept for reports) route-side buildings
 MODEL_ALL = True              # every building whose LoD2 is hidden in the photo zone is modeled
@@ -61,7 +61,7 @@ def _tiles(root):
                     'footprint': Polygon(m['footprintLocal']), 'textures': m['textures']})
     return out
 
-def select(root, origin):
+def select(root, origin, mesh_z_offset=0.0):
     ox, oy, oz = origin
     # Same rule as build-town.py's LoD2 replacement (mean wall position inside mesh_zone =
     # tile footprints shrunk 3 m): every building whose LoD2 walls are hidden is modeled here.
@@ -96,6 +96,8 @@ def select(root, origin):
                      if s['surface'] in ('WallSurface', 'RoofSurface', 'ClosureSurface') and len(s['coordinates']) >= 3]
             chosen.append({'id': b['id'], 'tile': owner, 'footprint': fp, 'faces': faces,
                            'passages': [g for g in passages if g.intersects(fp)]})
+    for b in osm_lod1(root, origin, tiles, cover, mesh_z_offset):
+        b['passages'] = [g for g in passages if g.intersects(b['footprint'])]; chosen.append(b)
     return chosen, tiles
 
 def _source_rgb(root, cache, tile, mat, meta):
@@ -109,13 +111,13 @@ def _source_rgb(root, cache, tile, mat, meta):
 
 def bake(root, origin, mesh_z_offset):
     root = Path(root).resolve(); cache = root / 'modeled-buildings'; cache.mkdir(exist_ok=True)
-    chosen, tiles = select(root, origin)
+    chosen, tiles = select(root, origin, mesh_z_offset)
     key = hashlib.sha256(json.dumps([VERSION, MODELED_TILES, OUT_M, IN_M, ATLAS, MIN_TEXEL_M, round(mesh_z_offset, 4),
                                      sorted(b['id'] for b in chosen)]).encode()).hexdigest()[:16]
     stamp = cache / 'bake.json'
     if stamp.exists() and json.loads(stamp.read_text()).get('key') == key: return json.loads(stamp.read_text())
     report = {'key': key, 'tiles': {}, 'buildings': len(chosen), 'meshZOffsetM': mesh_z_offset,
-              'source': 'geometry LoD2 GUGiK (lublin-buildings-clipped.json); colour baked from UM Lublin mesh 2022'}
+              'source': 'geometry LoD2 GUGiK (lublin-buildings-clipped.json), or LoD1 from an OSM outline newer than LoD2 2017 (height from the 2022 mesh); colour baked from UM Lublin mesh 2022'}
     baker = root / 'facade-baker'
     if not baker.exists() or baker.stat().st_mtime < (root / 'facade-baker.c').stat().st_mtime:
         subprocess.run(['cc', '-O3', '-o', str(baker), str(root / 'facade-baker.c'), '-lpthread'], check=True)
@@ -337,13 +339,29 @@ def _load(root):
         zone = unary_union(fps).buffer(REPLACE_BUFFER_M); shapely.prepare(zone); _state['fp'] = zone
     return _state['fp']
 
+LOD1_CLEAR_ABOVE_M = 3.0   # photo above a LoD1 roof by more than this is not that building (jibs, booms)
+
+def _lod1_above():
+    """(outlines, roof heights) of the LoD1 blocks built in this process, or None."""
+    r = _state.get('lod1Roofs')
+    if not r: return None
+    if _state.get('lod1AboveFor') is not r:   # built once per LoD1 set, not per chunk
+        _state['lod1Above'] = (shapely.STRtree([p.buffer(REPLACE_BUFFER_M) for p, _ in r]), np.array([z for _, z in r])); _state['lod1AboveFor'] = r
+    return _state['lod1Above']
+
 def apply(root, tile, lod, kept, images):
     """kept: [(texslot, verts(N,5), idx)], images: [PIL]. Removes photo triangles inside the
     modeled zone; appends this tile's modeled faces with their atlas. Returns (kept, images, removed)."""
-    zone = _load(root); out = []; removed = 0
+    zone = _load(root); out = []; removed = 0; above = _lod1_above()
     for slot, vv, ii in kept:
         tri = ii.reshape(-1, 3).astype(np.int64); c = vv[tri, :2].mean(1)
-        inside = shapely.contains_xy(zone, c[:, 0], c[:, 1]); removed += int(inside.sum())
+        inside = shapely.contains_xy(zone, c[:, 0], c[:, 1])
+        if above is not None and inside.any():   # pieces well above a LoD1 roof (crane jibs) stay for drop_loose
+            area, roof = above; z = vv[tri, 2].min(1); k = np.flatnonzero(inside)
+            hit = area.query(shapely.points(c[k]), predicate='within')
+            keep = np.zeros(len(k), bool); keep[hit[0]] = z[k[hit[0]]] > roof[hit[1]] + LOD1_CLEAR_ABOVE_M
+            inside[k[keep]] = False
+        removed += int(inside.sum())
         if inside.all(): continue
         out.append((slot, vv, tri[~inside].reshape(-1).astype('<u2')))
     cache = Path(root) / 'modeled-buildings'
@@ -357,33 +375,122 @@ def apply(root, tile, lod, kept, images):
 
 LEFTOVER_M = 6.0   # photo pieces mostly within this distance of modeled buildings are leftovers
 
-def osm_only_footprints(root, origin):
-    """OSM building outlines not covered by any LoD2 building (newer than the 2017 LoD2):
-    their photo mesh is the only geometry and must never be treated as a leftover."""
+LOD1_SKIP = {'ruins', 'collapsed', 'no'}   # remains are not solid blocks
+LOD1_CANOPY = {'roof', 'carport'}   # open structures: roof slab on posts, no walls
+CANOPY_SLAB_M, CANOPY_POST_M, CANOPY_MAX_POSTS = .35, .3, 16
+LOD1_MIN_AREA_M2, LOD1_MIN_HEIGHT_M, LOD1_TOP_QUANTILE = 12.0, 2.5, .95
+
+def _osm_buildings(root, origin):
+    """[(way id, tags, outline polygon in local metres)] for every closed OSM building way (ODbL)."""
+    if 'osm' in _state: return _state['osm']
     import xml.etree.ElementTree as ET
     from pyproj import Transformer
-    ox, oy = origin[:2]; tr = Transformer.from_crs(4326, 2180, always_xy=True); nodes = {}; polys = []
+    ox, oy = origin[:2]; tr = Transformer.from_crs(4326, 2180, always_xy=True); nodes = {}; ways = {}
     for path in sorted((Path(root) / 'osm-tiles').glob('*.osm')):
         t = ET.parse(path).getroot()
         for n in t.findall('node'): nodes[n.get('id')] = (float(n.get('lon')), float(n.get('lat')))
         for w in t.findall('way'):
-            if not any(x.get('k') == 'building' for x in w.findall('tag')): continue
-            refs = [x.get('ref') for x in w.findall('nd')]
-            if len(refs) >= 4 and all(r in nodes for r in refs):
-                polys.append(Polygon([tuple(np.array(tr.transform(*nodes[r])) - [ox, oy]) for r in refs]).buffer(0))
+            tags = {x.get('k'): x.get('v') for x in w.findall('tag')}
+            if 'building' in tags: ways[w.get('id')] = (tags, [x.get('ref') for x in w.findall('nd')])
+    out = []
+    for wid, (tags, refs) in sorted(ways.items()):   # tiles overlap: one entry per way
+        if len(refs) >= 4 and all(r in nodes for r in refs):
+            p = Polygon([tuple(np.array(tr.transform(*nodes[r])) - [ox, oy]) for r in refs]).buffer(0)
+            if not p.is_empty and p.area > 0: out.append((wid, tags, p))
+    _state['osm'] = out
+    return out
+
+def _osm_only(root, origin):
+    """The OSM outlines not covered by any LoD2 building (newer than the 2017 LoD2): area not
+    covered by LoD2 (+1 m) must exceed half. Per outline, against only the LoD2 ground polygons
+    it touches (a city-wide union re-buffered for every OSM outline took hours)."""
+    ox, oy = origin[:2]
     lod2 = [Polygon([(v[0] - ox, v[1] - oy) for v in s['coordinates']]).buffer(0)
             for b in json.loads((Path(root) / 'lublin-buildings-clipped.json').read_text())['buildings']
             for s in b['surfaces'] if s['surface'] == 'GroundSurface' and len(s['coordinates']) >= 3]
-    # Per outline, against only the LoD2 ground polygons it touches (a city-wide union re-buffered
-    # for every OSM outline took hours): area not covered by LoD2 (+1 m) must exceed half.
     lod2 = shapely.buffer(np.array([g for g in lod2 if not g.is_empty], dtype=object), 1); tree = shapely.STRtree(lod2)
     out = []
-    for p in polys:
-        if p.is_empty or p.area <= 0: continue
+    for wid, tags, p in _osm_buildings(root, origin):
         hit = tree.query(p, predicate='intersects')
         covered = unary_union(lod2[hit]).intersection(p).area if len(hit) else 0.0
-        if p.area - covered > .5 * p.area: out.append(p)
-    return unary_union(out)
+        if p.area - covered > .5 * p.area: out.append((wid, tags, p))
+    return out
+
+def osm_only_footprints(root, origin):
+    """Union of the OSM-only outlines: their photo mesh is never treated as a leftover."""
+    u = unary_union([p for _, _, p in _osm_only(root, origin)]); shapely.prepare(u); return u
+
+def _terrain(root):
+    """Bilinear sampler of the GUGiK NMT 5 m grid (local metres -> local height)."""
+    meta = json.loads((Path(root) / 'terrain-build/terrain.json').read_text())
+    G = np.load(Path(root) / 'terrain-build/terrain-5m.npy').astype(np.float64)
+    x0, _, _, y1 = meta['boundsEPSG2180']
+    def sample(x, y, origin):
+        ox, oy, oz = origin
+        r = np.clip((y1 - (np.asarray(y) + oy)) / 5, 0, G.shape[0] - 1.000001); c = np.clip((np.asarray(x) + ox - x0) / 5, 0, G.shape[1] - 1.000001)
+        i, j = r.astype(int), c.astype(int); f, u = r - i, c - j
+        return (G[i, j] * (1 - u) * (1 - f) + G[i, j + 1] * u * (1 - f) + G[i + 1, j] * (1 - u) * f + G[i + 1, j + 1] * u * f) - oz
+    return sample
+
+def osm_lod1(root, origin, tiles, cover, mesh_z_offset):
+    """OSM-only buildings inside the photo zone as LoD1 blocks: walls along the OSM outline (and its
+    courtyards), a flat roof at the 2022 mesh height (LOD1_TOP_QUANTILE of the photo vertices inside
+    the outline shrunk 1 m), base on the NMT. Without enough photo evidence the outline is skipped
+    (its photo mesh stays as it is). Raw mesh heights are cached per outline set."""
+    root = Path(root); cache = root / 'modeled-buildings'; cache.mkdir(exist_ok=True)
+    cand = []
+    for wid, tags, p in _osm_only(root, origin):
+        if tags.get('building') in LOD1_SKIP or p.area < LOD1_MIN_AREA_M2: continue
+        c = p.representative_point()
+        if not shapely.contains_xy(cover, c.x, c.y): continue
+        q = shapely.orient_polygons(p.simplify(.15))
+        if q.geom_type == 'Polygon' and q.is_valid and not q.is_empty: cand.append((wid, tags, q))
+    key = hashlib.sha256(json.dumps([VERSION, LOD1_TOP_QUANTILE,
+                                     [(w, shapely.to_wkb(p).hex()) for w, _, p in cand]]).encode()).hexdigest()[:16]
+    stamp = cache / 'osm-lod1.json'
+    tops = json.loads(stamp.read_text())['tops'] if stamp.exists() and json.loads(stamp.read_text()).get('key') == key else None
+    if tops is None:
+        tops = {}; inner = {w: p.buffer(-1.0) for w, _, p in cand}
+        for t in tiles:
+            tb = t['bbox']; mine = [w for w, _, p in cand if not inner[w].is_empty and shapely.intersects(inner[w], shapely.box(*tb))]
+            if not mine: continue
+            z = np.load(root / 'city-mesh-2022/import' / t['tile'] / 'A/mesh.npz')
+            P = np.concatenate([z[f'v{i}'][:, :3].astype(np.float64) for i in range(int(z['count']))])
+            for w in mine:
+                b = inner[w].bounds; s_ = (P[:, 0] > b[0]) & (P[:, 0] < b[2]) & (P[:, 1] > b[1]) & (P[:, 1] < b[3])
+                if not s_.any(): continue
+                q = P[s_]; q = q[shapely.contains_xy(inner[w], q[:, 0], q[:, 1])]
+                if len(q): tops.setdefault(w, []).extend(q[:, 2].tolist())
+        tops = {w: [len(v), float(np.quantile(v, LOD1_TOP_QUANTILE))] for w, v in tops.items()}   # raw mesh z
+        stamp.write_text(json.dumps({'key': key, 'tops': tops}))
+    ground = _terrain(root); out = []; report = {'candidates': len(cand), 'built': 0, 'canopies': 0, 'noPhoto': 0, 'tooLow': 0}
+    for wid, tags, p in cand:
+        ring = np.asarray(p.exterior.coords)[:-1]
+        base = float(np.min(ground(ring[:, 0], ring[:, 1], origin))) - .3
+        if wid not in tops or tops[wid][0] < 30: report['noPhoto'] += 1; continue
+        top = tops[wid][1] + mesh_z_offset
+        if top - base < LOD1_MIN_HEIGHT_M: report['tooLow'] += 1; continue
+        faces = []; canopy = tags.get('building') in LOD1_CANOPY
+        low = top - CANOPY_SLAB_M if canopy else base      # walls, or the slab's edge band
+        for r in [p.exterior, *p.interiors]:   # oriented: exterior CCW, holes CW -> outward wall normals
+            q = np.asarray(r.coords)
+            for a_, b_ in zip(q[:-1], q[1:]):
+                if np.hypot(*(b_ - a_)) < .3: continue
+                faces.append(np.array([[*a_, low], [*b_, low], [*b_, top], [*a_, top]]))
+        roofs = [p] if not p.interiors else [shapely.orient_polygons(g) for g in shapely.constrained_delaunay_triangles(p).geoms]   # CCW: roof normal up
+        if canopy:
+            for g in roofs:   # underside: reversed ring, normal down
+                faces.append(np.column_stack([np.asarray(g.exterior.coords)[:-1][::-1], np.full(len(g.exterior.coords) - 1, low)]))
+            corners = np.asarray(p.buffer(-CANOPY_POST_M).exterior.coords)[:-1] if not p.buffer(-CANOPY_POST_M).is_empty else ring
+            for c_ in corners[np.linspace(0, len(corners) - 1, min(len(corners), CANOPY_MAX_POSTS)).astype(int)]:
+                h_ = CANOPY_POST_M / 2
+                sq = [c_ + d for d in ((-h_, -h_), (h_, -h_), (h_, h_), (-h_, h_))]
+                for a_, b_ in zip(sq, sq[1:] + sq[:1]): faces.append(np.array([[*a_, base], [*b_, base], [*b_, low], [*a_, low]]))
+        for g in roofs: faces.append(np.column_stack([np.asarray(g.exterior.coords)[:-1], np.full(len(g.exterior.coords) - 1, top)]))   # roof last (lod1Roofs)
+        out.append({'id': f'OSM-way-{wid}', 'tile': _assign(np.array(p.centroid.coords[0]), tiles)['tile'], 'footprint': p, 'faces': faces})
+        report['built'] += 1; report['canopies'] += canopy
+    _state['lod1Report'] = report; _state['lod1Roofs'] = [(b['footprint'], b['faces'][-1][0, 2]) for b in out]
+    return out
 
 def drop_leftovers(root, kept, photo_slots, osm_only):
     """Remove connected photo pieces that lie (>70 %) within LEFTOVER_M of modeled buildings and not
@@ -394,7 +501,8 @@ def drop_leftovers(root, kept, photo_slots, osm_only):
     if near is None:
         cache = Path(root) / 'modeled-buildings'
         fps = [shapely.from_wkb(bytes.fromhex(h)) for h in json.loads((cache / 'footprints.json').read_text())]
-        near = _state['near'] = unary_union(shapely.buffer(np.array(fps, dtype=object), LEFTOVER_M))   # union of buffers: cheap; shapely.prepare(near); shapely.prepare(osm_only)
+        near = _state['near'] = unary_union(shapely.buffer(np.array(fps, dtype=object), LEFTOVER_M)); shapely.prepare(near)
+    shapely.prepare(osm_only)   # reused for every chunk
     out = []; removed = 0
     for slot, vv, ii in kept:
         if slot >= photo_slots: out.append((slot, vv, ii)); continue

@@ -4,8 +4,9 @@ import numpy as np
 import shapely
 from pyproj import Transformer
 
-def tree_meshes(root,ground,street,buildings,per_tree=False):
- """per_tree: one mesh per tree (each a knockdown prop in the engine); else 80 m cells."""
+def tree_meshes(root,ground,street,buildings,per_tree=False,extra=()):
+ """per_tree: one mesh per tree (each a knockdown prop in the engine); else 80 m cells.
+ extra: (numeric id, local x, local y, tags) trees placed by another owner (city_cemetery)."""
  transform=Transformer.from_crs(4326,2180,always_xy=True);nodes={}
  for path in sorted((root/'osm-tiles').glob('*.osm')):
   for n in ET.parse(path).getroot().findall('node'):
@@ -15,6 +16,7 @@ def tree_meshes(root,ground,street,buildings,per_tree=False):
  vv=[];ii=[];col=[];count=0;previous_cell=None;positioned=[]
  for identity,(lon,lat,tags)in nodes.items():
   x,y=transform.transform(lon,lat);x-=746600;y-=381750;positioned.append(((math.floor(x/80),math.floor(y/80)),identity,x,y,tags))
+ for identity,x,y,tags in extra:positioned.append(((math.floor(x/80),math.floor(y/80)),identity,x,y,tags))
  for cell,identity,x,y,tags in sorted(positioned):
   if not(-2100<x<2800 and -1750<y<1750)or road_clear.covers(shapely.Point(x,y))or buildings.covers(shapely.Point(x,y)):continue
   try:height=max(3,min(20,float(tags.get('height',8))));radius=max(1,min(6,float(tags.get('diameter_crown',height*.65))/2))

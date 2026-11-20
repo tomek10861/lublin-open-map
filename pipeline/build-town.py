@@ -351,9 +351,15 @@ else:
     _sel=_t[(_cell==_k).all(1)].reshape(-1);_u,_inv=np.unique(_sel,return_inverse=True);add(2|256|512,1,vv[_u],_inv.astype('<u2'))
   print('bridge collision faces',sum(len(i)//6 for v,i in _bridge_walls),flush=True)
   print('footbridges',[(r['way'],round(max(r['z'])-min(r['z']),1),round(r['stationM'][-1]))for r in _foot],flush=True)
+ # Christian cemeteries (city_cemetery owns them): procedural old trees, graves, OSM boundary walls.
+ from city_cemetery import build as cemetery_build
+ _cem=cemetery_build(root,(ox,oy,oz),lambda x,y:h_vec(np.asarray(x)+ox,np.asarray(y)+oy)-oz,protected_buildings)
+ for _v,_i,_c in _cem['visual']:store(2|256|1024,photoCount+3,_v,_i,_c)   # visual only
+ for _v,_i in _cem['collision']:store(2|256|512,photoCount+3,_v,_i)      # invisible wall collision
+ cemeteryReport=_cem['report'];print('cemeteries',{k:cemeteryReport[k] for k in ('graves','trees','wallsM','visualTriangles')},flush=True)
  tree_count=0
  # One mesh per tree: cat 4096 makes it a knockdown prop (falls when hit), 256 no drive surface.
- for vv,ii,colors,n in tree_meshes(root,lambda x,y:h_vec(x+ox,y+oy)-oz,street_cut,protected_buildings,per_tree=True):
+ for vv,ii,colors,n in tree_meshes(root,lambda x,y:h_vec(x+ox,y+oy)-oz,street_cut,protected_buildings,per_tree=True,extra=_cem['trees']):
   store(2|256|4096,photoCount+3,vv,ii,np.frombuffer(colors,dtype='u1').reshape(-1,4));tree_count+=n
  # One plate per (street, junction): 9 m into the street from the junction, 1.5 m
  # beyond its kerb, parallel to the street it names (readable from the crossing).
@@ -514,6 +520,8 @@ else:
   _top=max((q[2]for _s in _b['surfaces']if _s['surface']=='RoofSurface'for q in _s['coordinates']),default=None)
   for _s in _b['surfaces']:
    if _top is not None and _s['surface']=='GroundSurface'and len(_s['coordinates'])>=3:_tops.append((Polygon([(q[0]-ox,q[1]-oy)for q in _s['coordinates']]).buffer(1.0),_top-oz))
+ # LoD1 blocks (OSM outlines newer than LoD2) carry their 2022 roof too: rooftop pieces are not crane jibs.
+ _tops+=[(_p.buffer(1.0),float(_z)) for _p,_z in __import__('city_modeled_buildings')._state.get('lod1Roofs',[])]
  _roof=rasterio.features.rasterize(sorted(_tops,key=lambda t:t[1]),out_shape=(_sh,_sw),transform=_st,fill=-1e9,dtype='float32')
  def support_height(x,y):
   c=np.clip(((x-_sx0)/2).astype(int),0,_sw-1);r=np.clip(((_sy1-y)/2).astype(int),0,_sh-1)
@@ -573,8 +581,10 @@ else:
  (root/'modeled-buildings/crane-candidates.json').write_text(json.dumps([{k:(v.tolist() if hasattr(v,'tolist') else v) for k,v in j.items()} for j in _jibs]))
  from city_landmarks import crane_free_zone
  _cfz=crane_free_zone(root,(ox,oy,oz));cranes=[c for c in crane_merge(_jibs) if not _cfz.contains(shapely.Point(*c['mast']))]
+ from city_cranes import verified as crane_verified
+ _ver=crane_verified(lambda x,y:h_vec(x+ox,y+oy)-oz);cranes=[c for c in cranes if all(np.linalg.norm(c['mast']-v['mast'])>=25 for v in _ver)]+_ver   # one per 25 m
  for _kind,_cv,_ci in crane_meshes(cranes,lambda x,y:h_vec(x+ox,y+oy)-oz):add(2|256|1024,14,_cv,_ci)   # lattice texture marks crane meshes
- craneReport=[{'mast':[round(float(c['mast'][0]),1),round(float(c['mast'][1]),1)],'jibZ':round(c['jibZ'],1),'reachM':round(c['reachM'],1)}for c in cranes]
+ craneReport=[{'mast':[round(float(c['mast'][0]),1),round(float(c['mast'][1]),1)],'jibZ':round(c['jibZ'],1),'reachM':round(c['reachM'],1),'source':c.get('site','detected jib in the 2022 mesh')}for c in cranes]
  print('cranes',craneReport,flush=True)
  # Landmarks (city_landmarks): Muszla Koncertowa in Ogrod Saski — visual meshes + invisible 3 m collision wall.
  for _kind,_lv,_li in landmark_meshes(lambda x,y:h_vec(x+ox,y+oy)-oz):
@@ -760,5 +770,5 @@ raw=body.getvalue();package=b'TOWNv002'+struct.pack('<I',len(raw))+zlib.compress
 if '--events-only' in sys.argv:
  report=previous_report.copy();report.update(events=eventReport,meshes=len(meshes),triangles=sum(len(m[3])//3 for m in meshes),packageBytes=len(package),unpackedBytes=len(raw))
 else:
- report={'fence':{'parks':len(_park),'posts':fencePosts,'gaps':fenceGaps},'events':eventReport,'passageClearAreaM2':passageClearAreaM2,'osmCollisionWalls':{'buildings':osmWallBuildings,'edges':osmWallEdges,'passageEdgesOpen':osmPassageEdges},'mapBoundary':{'insetM':inset,'segments':boundarySegments,'heightM':7,'visible':False},'cityMesh':cityMeshReport,'streetSigns':{'plates':signCount,'names':len(sign_names),'junctionPoints':len(junction_names),'source':'OSM name (ODbL)',"atlas":[SIGN_ATLAS_W,atlas_h]},'ground':groundReport,'meshes':len(meshes),'triangles':sum(len(m[3])//3 for m in meshes),'packageBytes':len(package),'unpackedBytes':len(raw),'wallTriangles':wallTriangles,'roofTriangles':roofTriangles,'skippedDegenerateOrInvalidPolygons':skipped,'bridges':bridges,'routeLengthM':route['lengthM'],'status':'isolated native prototype, not production','orthoSource':'GUGiK WMS HighResolution Raster only','orthoCacheMPerPixel':.1,'runtimeOrthoMPerPixel':.5,'orthoAtlasTiles':len(atlas),'attribution':'Źródło: GUGiK, geoportal.gov.pl','sources':['GUGiK NMT1m2017, PL-KRON86-NH','GUGiK LoD2buildings2017 CC BY4.0','GUGiK WCS ortho','©OpenStreetMapcontributors ODbL'],'textureSettings':{'gutterPx':16,'wrap':'clamp_to_edge for ortho atlases','anisotropy':16,'mips':'generated at native upload after padding'},'remainingTextureWork':['light ortho blend at road shoulders','epoch sharpness selection must feed mosaic before final build'],'limits':['facade textures are authored substitutes, not photographic elevations','bridge elevations interpolated, need road-level validation','source city/road dates differ']}
+ report={'cemeteries':cemeteryReport,'osmLoD1':__import__('city_modeled_buildings')._state.get('lod1Report'),'fence':{'parks':len(_park),'posts':fencePosts,'gaps':fenceGaps},'events':eventReport,'passageClearAreaM2':passageClearAreaM2,'osmCollisionWalls':{'buildings':osmWallBuildings,'edges':osmWallEdges,'passageEdgesOpen':osmPassageEdges},'mapBoundary':{'insetM':inset,'segments':boundarySegments,'heightM':7,'visible':False},'cityMesh':cityMeshReport,'streetSigns':{'plates':signCount,'names':len(sign_names),'junctionPoints':len(junction_names),'source':'OSM name (ODbL)',"atlas":[SIGN_ATLAS_W,atlas_h]},'ground':groundReport,'meshes':len(meshes),'triangles':sum(len(m[3])//3 for m in meshes),'packageBytes':len(package),'unpackedBytes':len(raw),'wallTriangles':wallTriangles,'roofTriangles':roofTriangles,'skippedDegenerateOrInvalidPolygons':skipped,'bridges':bridges,'routeLengthM':route['lengthM'],'status':'isolated native prototype, not production','orthoSource':'GUGiK WMS HighResolution Raster only','orthoCacheMPerPixel':.1,'runtimeOrthoMPerPixel':.5,'orthoAtlasTiles':len(atlas),'attribution':'Źródło: GUGiK, geoportal.gov.pl','sources':['GUGiK NMT1m2017, PL-KRON86-NH','GUGiK LoD2buildings2017 CC BY4.0','GUGiK WCS ortho','©OpenStreetMapcontributors ODbL'],'textureSettings':{'gutterPx':16,'wrap':'clamp_to_edge for ortho atlases','anisotropy':16,'mips':'generated at native upload after padding'},'remainingTextureWork':['light ortho blend at road shoulders','epoch sharpness selection must feed mosaic before final build'],'limits':['facade textures are authored substitutes, not photographic elevations','bridge elevations interpolated, need road-level validation','source city/road dates differ']}
 (out/'build-report.json').write_text(json.dumps(report,indent=2,ensure_ascii=False));print(json.dumps({k:v for k,v in report.items()if k!='bridges'},indent=2,ensure_ascii=False))

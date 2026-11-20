@@ -2,7 +2,7 @@
 
 [Wersja polska](LICENSES.md) (authoritative)
 
-Checked **2026-11-19**. A summary of the terms published by the data providers, not legal advice.
+Checked **2026-11-20**. A summary of the terms published by the data providers, not legal advice.
 
 ## Summary
 
@@ -44,10 +44,20 @@ derived layers under the Polish Open Data Act of 11 August 2021 (Dz.U. 2023 poz.
 allows re-use of information published by public bodies, including on their own systems, "for any
 purpose" and free of charge, subject to the limits in art. 6 (third-party rights, personal data).
 
-Derived from it: `photo/` and the crane positions/heights in `city/`.
+Derived from it: `photo/`, the roof heights and colours of the LoD1 blocks (buildings newer than
+LoD2) and the crane heights in `city/`.
 **We will remove these layers promptly at the request of the City of Lublin or another rights
 holder.** For commercial ports consider a build without `photo/` (`tools/subset.py --no-photo`) or
 ask the city (`geoportal@lublin.eu`).
+
+## Own models
+
+The procedural models and textures of this project (gates, viaducts, footbridges, the Concert Shell,
+the CSK facade, the Portal, monuments, cranes, benches, trees, signs, surfaces, facades, cemetery
+graves, walls and fences) are MIT. Their positions and sizes come from GUGiK and OSM data; graves
+are placed procedurally inside the OSM cemetery outlines. Grave forms follow written descriptions
+(no photos or text copied): [Plastyka nagrobków](https://lipowa.cmentarz.lublin.pl/wazne-miejsca/plastyka-nagrobkow/)
+(Lipowa street cemetery) and [Style i formy](https://dormitorium.lublin.pl/28/style-i-formy.htm).
 
 ## Not in this repository
 

@@ -45,10 +45,34 @@ def areas(root,road_width,*,with_buildings=False):
   strips.append(LineString([(x-ox,y-oy)for x,y in course]).buffer(8.0,join_style='round'))
  street=unary_union(strips).difference(buildings)
  return (street,unary_union(passages),buildings)if with_buildings else (street,unary_union(passages))
+LOCAL_LEAF_COORDS,LOCAL_LEAF_M=4000,96.0
+_local_index={}   # id(area) -> (area, leaf boxes STRtree, leaf pieces); the area ref pins the id
+def local(area,bounds):
+ """area ∩ bounds. A city-wide clearance area is split once into a quadtree of box-aligned pieces
+ (one overlay per level instead of one full-city overlay per mesh chunk); the result equals the
+ direct intersection, with extra collinear vertices at leaf seams only."""
+ ax0,ay0,ax1,ay1=area.bounds if not area.is_empty else (0,0,0,0);bx0,by0,bx1,by1=bounds.bounds
+ if area.is_empty or shapely.get_num_coordinates(area)<=LOCAL_LEAF_COORDS or (ax1-ax0)*(ay1-ay0)<=16*max(1e-9,(bx1-bx0)*(by1-by0)):return area.intersection(bounds)   # chunk-sized: direct
+ entry=_local_index.get(id(area))
+ if entry is None or entry[0] is not area:
+  boxes=[];pieces=[]
+  def split(g,box):
+   if g.is_empty:return
+   x0,y0,x1,y1=box
+   if shapely.get_num_coordinates(g)<=LOCAL_LEAF_COORDS or max(x1-x0,y1-y0)<=LOCAL_LEAF_M:boxes.append(shapely.box(*box));pieces.append(g);return
+   xm,ym=(x0+x1)/2,(y0+y1)/2
+   for q in((x0,y0,xm,ym),(xm,y0,x1,ym),(x0,ym,xm,y1),(xm,ym,x1,y1)):split(g.intersection(shapely.box(*q)),q)
+  split(area,area.bounds)
+  if len(_local_index)>=8:_local_index.clear()   # a few long-lived city areas per build
+  entry=_local_index[id(area)]=(area,shapely.STRtree(boxes),np.array(pieces,dtype=object))
+ _,tree,pieces=entry;hit=tree.query(bounds,predicate='intersects')
+ if not len(hit):return Polygon()
+ parts=shapely.get_parts(shapely.intersection(pieces[hit],bounds));parts=parts[shapely.get_type_id(parts)==3]   # seam-touching leaves add bare edges
+ return unary_union(parts) if len(parts) else Polygon()
 def clip(v,idx,street,passages,ground):
  """Return chunks (vertices, indices), preserving UV/Z by barycentric interpolation."""
  bounds=shapely.box(float(v[:,0].min())-.01,float(v[:,1].min())-.01,float(v[:,0].max())+.01,float(v[:,1].max())+.01)
- street=street.intersection(bounds);passages=passages.intersection(bounds)
+ street=local(street,bounds);passages=local(passages,bounds)
  shapely.prepare(street);shapely.prepare(passages)
  tri=idx.reshape(-1,3);xyz=v[tri];c=xyz[:,:,:3].mean(1)
  if ground is None:low=np.ones(len(tri),bool);portal=np.zeros(len(tri),bool)
@@ -104,7 +128,7 @@ def floor_chunks(v,idx,street):
  """Fill the cleared corridor with the actual collision terrain's interpolated surface."""
  bounds=shapely.box(float(v[:,0].min())-.01,float(v[:,1].min())-.01,float(v[:,0].max())+.01,float(v[:,1].max())+.01)
  if not street.intersects(bounds):return []
- outside=bounds.difference(street)
+ outside=bounds.difference(local(street,bounds))
  floor=v.copy();floor[:,2]+=.04;floor[:,3:5]=floor[:,:2]/8
  return clip(floor,idx,outside,Polygon(),None)[0]
 

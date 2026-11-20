@@ -12,6 +12,7 @@
   "csk": {"label": "Centrum Spotkania Kultur", "x": 963, "y": -207, "dist": 220, "yaw": 30, "pitch": 24},
   "umcs-curie": {"label": "Plac Curie-Skłodowskiej, UMCS", "x": 492, "y": -367, "dist": 260, "yaw": 20, "pitch": 26},
   "wiadukt-solidarnosci": {"label": "Wiadukt, Aleja Solidarności", "x": -251, "y": 1077, "dist": 170, "yaw": 120, "pitch": 12},
+  "cmentarz-lipowa": {"label": "Cmentarz przy ul. Lipowej", "x": 1000, "y": -640, "dist": 32, "yaw": 20, "pitch": 9},
   "cerkiew-warszawska": {"label": "Cerkiew, Aleja Warszawska", "x": -1747, "y": 1081, "dist": 75, "yaw": 0, "pitch": 14},
   "trasy-wyscigow": {"label": "Trasy wyścigów", "x": 350, "y": 0, "dist": 3100, "top": true, "radius": 3600, "routes": true, "photo": false}
 }

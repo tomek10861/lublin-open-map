@@ -44,6 +44,27 @@ def merge(found):
         out.append({'mast': mast, 'back': back, 'front': front, 'axis': axis, 'jibZ': j['z'], 'reachM': length})
     return out
 
+# Cranes confirmed by sources AND measured in the 2022 mesh, whose jibs the detector misses
+# (split across tile seams / a jib deeper than MAX_DEPTH_M). Ends: local metres (back = counter-jib
+# end, chosen at the denser end where visible, else the end away from the site); jib underside
+# height above the NMT. Rezydencja Ogrod Saski (Wieniawska / Jasna / Ewangelicka / Karskiego):
+# construction began 30 Mar 2022 (mota-engil-ce.eu press release), handed over 2024; the 2022
+# mesh shows its excavation, up to 8 m below the street.
+VERIFIED_2022 = [
+    {'site': 'Rezydencja Ogrod Saski, east', 'back': (1297.5, 44.0), 'front': (1294.8, 2.0), 'jibAboveGroundM': 49.0},
+    {'site': 'Rezydencja Ogrod Saski, Wieniawska 9', 'back': (1212.7, 93.3), 'front': (1234.2, 74.0), 'jibAboveGroundM': 41.3},
+]
+
+def verified(ground):
+    """VERIFIED_2022 in the merge() output form (mast 1/4 of the jib from its back end)."""
+    out = []
+    for c in VERIFIED_2022:
+        back, front = np.asarray(c['back'], float), np.asarray(c['front'], float); length = float(np.linalg.norm(front - back))
+        axis = (front - back) / length; mast = back + axis * length * .25
+        g = float(ground(np.array([mast[0]]), np.array([mast[1]]))[0])
+        out.append({'mast': mast, 'back': back, 'front': front, 'axis': axis, 'jibZ': g + c['jibAboveGroundM'], 'reachM': length, 'site': c['site']})
+    return out
+
 def _box(V, I, p0, p1, w, h, z0, uvscale=4):
     """Box along segment p0->p1 (xy), width w, from z0 up h; all faces double-sided."""
     d = np.asarray(p1, float) - np.asarray(p0, float); L = np.linalg.norm(d)
