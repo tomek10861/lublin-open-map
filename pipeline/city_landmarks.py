@@ -142,6 +142,10 @@ PORTAL = {'centre': (1747.7, -51.0),   # GPS 51.24781 N, 22.55980 E (user-provid
 def portal_zone(m=PORTAL):
     return Point(*m['centre']).buffer(4.0)
 
+def owned_zone():
+    """Spots owned by hand-modeled landmarks: no other generator (e.g. OSM LoD1 blocks) builds there."""
+    return unary_union([zone(), portal_zone()])
+
 def portal_collision(m=PORTAL):
     a = math.radians(m['facing_deg']); f = np.array([math.cos(a), math.sin(a)]); s = np.array([-f[1], f[0]]); c = np.asarray(m['centre'])
     hw, hd = m['outer_r'] + .1, m['depth'] / 2 + .1

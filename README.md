@@ -92,6 +92,9 @@ w `pipeline/`. Opis kroków: [docs/pipeline.md](docs/pipeline.md).
   w źródłach i zmierzone w siatce z 2022 r.; budowę oddano w 2024 r.
 - Budynki nowsze niż LoD2 (obrysy z OpenStreetMap) są prostymi bryłami LoD1 z wysokością dachu
   zmierzoną w siatce z 2022 r. i kolorem ze zdjęć; wiaty (`building=roof`) to dach na słupach.
+  Pomiar łapie też korony drzew i dźwigi, więc wysokość ogranicza tag OSM `height` lub
+  `building:levels` (3,3 m na kondygnację), a dla garaży, szop i wiat typ budynku; obrysy bez tagów
+  z nieprawdopodobnie smukłą bryłą zostają w fotogrametrii.
 - Nagrobki na cmentarzach są rozmieszczone proceduralnie: obrysy, aleje i mury pochodzą z OSM,
   a położenie i forma grobów nie odpowiadają rzeczywistym kwaterom. Formy (krzyże żeliwne
   i kamienne, obeliski, stele, złamane kolumny, sarkofagi, figury) wzorowano na opisach plastyki

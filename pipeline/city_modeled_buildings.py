@@ -10,7 +10,7 @@ Collision is unchanged (LoD2 walls are already the invisible physics; this is vi
 bake() caches results in work/modeled-buildings/; apply() is called by build-town.py.
 """
 import hashlib, json, math, struct, subprocess
-from city_landmarks import PHOTO_LANDMARK_IDS, FACADE_OVERRIDES
+from city_landmarks import PHOTO_LANDMARK_IDS, FACADE_OVERRIDES, owned_zone
 from pathlib import Path
 import numpy as np
 from PIL import Image
@@ -379,6 +379,24 @@ LOD1_SKIP = {'ruins', 'collapsed', 'no'}   # remains are not solid blocks
 LOD1_CANOPY = {'roof', 'carport'}   # open structures: roof slab on posts, no walls
 CANOPY_SLAB_M, CANOPY_POST_M, CANOPY_MAX_POSTS = .35, .3, 16
 LOD1_MIN_AREA_M2, LOD1_MIN_HEIGHT_M, LOD1_TOP_QUANTILE = 12.0, 2.5, .95
+# The mesh quantile also catches tree canopy and 2022 cranes over the outline (a garage under a
+# chestnut came out 22 m tall). OSM height/levels, or a single-storey building type, bound it from above.
+LOD1_LOW_TYPES = {'garage': 4.5, 'garages': 4.5, 'shed': 4.5, 'carport': 4.5, 'roof': 5.0, 'kiosk': 4.5,
+                  'hut': 4.5, 'cabin': 4.5, 'guardhouse': 4.5, 'greenhouse': 5.0, 'outbuilding': 5.5,
+                  'farm_auxiliary': 7.0, 'service': 6.0}
+LOD1_STOREY_M, LOD1_SLENDER = 3.3, 2.5   # untagged: height over LOD1_SLENDER*sqrt(area)+3 is not that building
+
+def _metres(v):
+    try: return float(str(v).split()[0].replace(',', '.'))
+    except (ValueError, IndexError): return None
+
+def _lod1_cap(tags):
+    """Upper bound (m above the outline's highest ground) from OSM tags, or None when untagged."""
+    h = _metres(tags.get('height'))
+    if h and h > 0: return h * 1.1 + 1.0
+    lv = _metres(tags.get('building:levels'))
+    if lv and lv > 0: return (lv + (_metres(tags.get('roof:levels')) or 0)) * LOD1_STOREY_M + 2.5
+    return LOD1_LOW_TYPES.get(tags.get('building'))
 
 def _osm_buildings(root, origin):
     """[(way id, tags, outline polygon in local metres)] for every closed OSM building way (ODbL)."""
@@ -438,9 +456,10 @@ def osm_lod1(root, origin, tiles, cover, mesh_z_offset):
     the outline shrunk 1 m), base on the NMT. Without enough photo evidence the outline is skipped
     (its photo mesh stays as it is). Raw mesh heights are cached per outline set."""
     root = Path(root); cache = root / 'modeled-buildings'; cache.mkdir(exist_ok=True)
-    cand = []
+    cand = []; owned = owned_zone(); landmark = 0
     for wid, tags, p in _osm_only(root, origin):
         if tags.get('building') in LOD1_SKIP or p.area < LOD1_MIN_AREA_M2: continue
+        if p.intersects(owned): landmark += 1; continue   # a hand-modeled landmark owns this spot (city_landmarks)
         c = p.representative_point()
         if not shapely.contains_xy(cover, c.x, c.y): continue
         q = shapely.orient_polygons(p.simplify(.15))
@@ -463,12 +482,17 @@ def osm_lod1(root, origin, tiles, cover, mesh_z_offset):
                 if len(q): tops.setdefault(w, []).extend(q[:, 2].tolist())
         tops = {w: [len(v), float(np.quantile(v, LOD1_TOP_QUANTILE))] for w, v in tops.items()}   # raw mesh z
         stamp.write_text(json.dumps({'key': key, 'tops': tops}))
-    ground = _terrain(root); out = []; report = {'candidates': len(cand), 'built': 0, 'canopies': 0, 'noPhoto': 0, 'tooLow': 0}
+    ground = _terrain(root); out = []; report = {'candidates': len(cand), 'landmarkOwned': landmark, 'heightCapped': 0, 'implausibleSkipped': 0, 'built': 0, 'canopies': 0, 'noPhoto': 0, 'tooLow': 0}
     for wid, tags, p in cand:
         ring = np.asarray(p.exterior.coords)[:-1]
         base = float(np.min(ground(ring[:, 0], ring[:, 1], origin))) - .3
         if wid not in tops or tops[wid][0] < 30: report['noPhoto'] += 1; continue
-        top = tops[wid][1] + mesh_z_offset
+        top = tops[wid][1] + mesh_z_offset; cap = _lod1_cap(tags)
+        if cap is not None:
+            high = float(np.max(ground(ring[:, 0], ring[:, 1], origin))) + cap
+            if top > high: top = high; report['heightCapped'] += 1
+        elif top - base > LOD1_SLENDER * p.area ** .5 + 3:   # canopy/crane over an untagged outline: keep its photo mesh
+            report['implausibleSkipped'] += 1; continue
         if top - base < LOD1_MIN_HEIGHT_M: report['tooLow'] += 1; continue
         faces = []; canopy = tags.get('building') in LOD1_CANOPY
         low = top - CANOPY_SLAB_M if canopy else base      # walls, or the slab's edge band

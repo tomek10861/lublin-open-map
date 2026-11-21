@@ -91,6 +91,9 @@ The whole pipeline (downloading GUGiK, OSM and city mesh data, building the city
   by sources and measured in the 2022 mesh; the building was handed over in 2024.
 - Buildings newer than LoD2 (OpenStreetMap outlines) are simple LoD1 blocks with the roof height
   measured in the 2022 mesh and photo colour; canopies (`building=roof`) are a roof on posts.
+  The measurement also picks up tree crowns and cranes, so the OSM `height` or `building:levels`
+  tag (3.3 m per storey), or the building type for garages, sheds and canopies, caps it; untagged
+  outlines with an implausibly slender block stay in the photogrammetry.
 - Cemetery graves are procedural: outlines, alleys and walls come from OSM, while grave positions
   and forms do not match the real plots. The forms (cast-iron and stone crosses, obelisks, steles,
   broken columns, sarcophagi, figures) follow descriptions of the Lipowa cemetery's funerary art.
