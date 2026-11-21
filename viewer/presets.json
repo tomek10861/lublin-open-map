@@ -13,6 +13,9 @@
   "umcs-curie": {"label": "Plac Curie-Skłodowskiej, UMCS", "x": 492, "y": -367, "dist": 260, "yaw": 20, "pitch": 26},
   "wiadukt-solidarnosci": {"label": "Wiadukt, Aleja Solidarności", "x": -251, "y": 1077, "dist": 170, "yaw": 120, "pitch": 12},
   "cmentarz-lipowa": {"label": "Cmentarz przy ul. Lipowej", "x": 1000, "y": -640, "dist": 32, "yaw": 20, "pitch": 9},
+  "skansen-dwor": {"label": "Muzeum Wsi Lubelskiej: Dwór z Żyrzyna", "x": -2001, "y": 1120, "dist": 45, "yaw": 0, "pitch": 14},
+  "skansen-miasteczko": {"label": "Muzeum Wsi Lubelskiej: Miasteczko i kościół z Matczyna", "x": -2160, "y": 1170, "dist": 95, "yaw": 0, "pitch": 18},
+  "skansen-wiatrak": {"label": "Muzeum Wsi Lubelskiej: wiatrak z Zygmuntowa", "x": -2157, "y": 1366, "dist": 40, "yaw": 180, "pitch": 10},
   "cerkiew-warszawska": {"label": "Cerkiew, Aleja Warszawska", "x": -1747, "y": 1081, "dist": 75, "yaw": 0, "pitch": 14},
   "trasy-wyscigow": {"label": "Trasy wyścigów", "x": 350, "y": 0, "dist": 3100, "top": true, "radius": 3600, "routes": true, "photo": false}
 }

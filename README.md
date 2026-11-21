@@ -1,8 +1,8 @@
 # Lublin Open Map
 
-**Otwarta mapa 3D centrum Lublina do gier i silników.** Około 5 × 3,5 km miasta:
+**Otwarta mapa 3D centrum Lublina do gier i silników.** Około 5,3 × 3,5 km miasta:
 fotogrametria Starego Miasta i Śródmieścia, budynki 3D, ulice z prawdziwymi nawierzchniami,
-wiadukty z filarami, charakterystyczne obiekty, drzewa i znaki do przewracania, kolizje,
+wiadukty z filarami, charakterystyczne obiekty, Muzeum Wsi Lubelskiej (skansen), drzewa i znaki do przewracania, kolizje,
 cztery trasy wyścigów i sieć pasów ruchu. Wszystko w otwartych formatach (glTF 2.0, GeoJSON,
 PNG), z opisem integracji z silnikami open source, symulatorami i klasycznymi grami.
 
@@ -21,8 +21,9 @@ PNG), z opisem integracji z silnikami open source, symulatorami i klasycznymi gr
 | ![Muszla Koncertowa](screenshots/muszla-saski.jpg) **Muszla Koncertowa w Ogrodzie Saskim** | ![CSK](screenshots/csk.jpg) **Centrum Spotkania Kultur** |
 | ![Plac Curie-Skłodowskiej](screenshots/umcs-curie.jpg) **Plac Marii Curie-Skłodowskiej, UMCS** | ![Wiadukt](screenshots/wiadukt-solidarnosci.jpg) **Wiadukt w Alei Solidarności** |
 | ![Cerkiew](screenshots/cerkiew-warszawska.jpg) **Cerkiew przy Alei Warszawskiej** (Muzeum Wsi Lubelskiej) | ![Stare Miasto z góry](screenshots/stare-miasto-z-gory.jpg) **Stare Miasto z góry** |
-| ![Cmentarz przy ul. Lipowej](screenshots/cmentarz-lipowa.jpg) **Cmentarz przy ul. Lipowej** (nagrobki proceduralne) | |
-| ![Całe miasto z góry](screenshots/miasto-z-gory.jpg) **Cały obszar mapy** (ok. 4,9 × 3,5 km) | ![Trasy wyścigów](screenshots/trasy-wyscigow.jpg) **Cztery trasy wyścigów** (3,5–5,5 km) |
+| ![Cmentarz przy ul. Lipowej](screenshots/cmentarz-lipowa.jpg) **Cmentarz przy ul. Lipowej** (nagrobki proceduralne) | ![Dwór z Żyrzyna](screenshots/skansen-dwor.jpg) **Muzeum Wsi Lubelskiej:** dwór z Żyrzyna |
+| ![Miasteczko](screenshots/skansen-miasteczko.jpg) **Muzeum Wsi Lubelskiej:** Miasteczko i kościół z Matczyna | ![Wiatrak](screenshots/skansen-wiatrak.jpg) **Muzeum Wsi Lubelskiej:** wiatrak z Zygmuntowa |
+| ![Całe miasto z góry](screenshots/miasto-z-gory.jpg) **Cały obszar mapy** (ok. 5,3 × 3,5 km) | ![Trasy wyścigów](screenshots/trasy-wyscigow.jpg) **Cztery trasy wyścigów** (3,5–5,5 km) |
 
 Zrzuty pochodzą z przeglądarki z tego repozytorium (`viewer/`, three.js), wyrenderowanej
 z danych wydania skryptem `tools/screenshots.cjs`.
@@ -31,14 +32,14 @@ z danych wydania skryptem `tools/screenshots.cjs`.
 
 | Część | Zawartość |
 |---|---|
-| `city/` | 88 komórek po 512 m: teren z ortofotomapą, ulice (asfalt, kostka na deptakach, płyty chodnikowe), budynki LoD2, wiadukty i kładki, bramy z przejazdami, Muszla Koncertowa, CSK, Portal Wilno-Lublin, pomniki, cmentarz przy ul. Lipowej i pozostałe cmentarze chrześcijańskie (aleje, nagrobki, mury), żurawie, tablice z nazwami ulic, **14 388 drzew i znaków** jako osobne obiekty do przewracania |
-| `photo/` | 122 kafle fotogrametrii (2022) centrum miasta, z budynkami odbudowanymi z LoD2 i oteksturowanymi zdjęciami; budynki nowsze niż LoD2 (z OpenStreetMap) jako bryły LoD1 |
+| `city/` | 88 komórek po 512 m: teren z ortofotomapą, ulice (asfalt, kostka na deptakach, płyty chodnikowe), budynki LoD2, wiadukty i kładki, bramy z przejazdami, Muszla Koncertowa, CSK, Portal Wilno-Lublin, pomniki, Muzeum Wsi Lubelskiej (83 obiekty skansenu), cmentarz przy ul. Lipowej i pozostałe cmentarze chrześcijańskie (aleje, nagrobki, mury), żurawie, tablice z nazwami ulic, **14 456 drzew i znaków** jako osobne obiekty do przewracania |
+| `photo/` | 123 kafle fotogrametrii (2022) centrum miasta, z budynkami odbudowanymi z LoD2 i oteksturowanymi zdjęciami; budynki nowsze niż LoD2 (z OpenStreetMap) jako bryły LoD1 |
 | `collision/` | siatki kolizji: nawierzchnie i ściany (budynki, bariery wiaduktów, obrysy obiektów) |
 | `races/` | bariery i oznaczenia czterech tras wyścigów |
-| `layers/` | GeoJSON: 428 ulic z nazwami, 3568 pasów ruchu, 4 trasy, drzewa i znaki, 50 punktów charakterystycznych, 7937 obrysów budynków z wysokościami |
+| `layers/` | GeoJSON: 428 ulic z nazwami, 3803 pasów ruchu, 4 trasy, drzewa i znaki, 50 punktów charakterystycznych, 8588 obrysów budynków z wysokościami |
 | `terrain/` | mapa wysokości 16-bit, 5 m na piksel |
 
-Rozmiar: około 690 MB bez fotogrametrii, 2,1 GB z nią. Opis formatu: [docs/format.md](docs/format.md).
+Rozmiar: około 710 MB bez fotogrametrii, 2,3 GB z nią. Opis formatu: [docs/format.md](docs/format.md).
 
 ## Szybki start
 
@@ -99,6 +100,11 @@ w `pipeline/`. Opis kroków: [docs/pipeline.md](docs/pipeline.md).
   a położenie i forma grobów nie odpowiadają rzeczywistym kwaterom. Formy (krzyże żeliwne
   i kamienne, obeliski, stele, złamane kolumny, sarkofagi, figury) wzorowano na opisach plastyki
   nagrobnej cmentarza przy ul. Lipowej. Cmentarzy żydowskich nie modelowano.
+- Muzeum Wsi Lubelskiej: budynki są modelami własnymi na obrysach z OSM. Numer i nazwa obiektu
+  pochodzą z oficjalnej mapy muzeum, a forma i pokrycie dachu oraz konstrukcja ścian z opisów sektorów
+  (`pipeline/skansen/objects.json`). Wysokości, nachylenia dachów, okna i kolory są przyjęte. Dla
+  Miasteczka muzeum nie opisuje konstrukcji, więc formy przyjęto ze zdjęć i nazw. 11 punktów mapy
+  muzeum (m.in. ule, brama z Firleja, rynek ze studnią) nie ma obrysu w OSM i nie jest modelowanych.
 - Poza strefą fotogrametrii budynki to bryły LoD2 z fasadami proceduralnymi.
 - Wysokości wiaduktów są wyznaczone z modelu pokrycia terenu i mogą odbiegać od rzeczywistych
   o kilkadziesiąt centymetrów.

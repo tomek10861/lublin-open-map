@@ -112,8 +112,8 @@ class Gltf:
                      'NORMAL': self._acc(vertex_normals(P, I), 'VEC3', 5126, 34962)}
             if V.shape[1] >= 5 and mat is not None and C is None:
                 attrs['TEXCOORD_0'] = self._acc(np.ascontiguousarray(V[:, 3:5]), 'VEC2', 5126, 34962)
-            if C is not None:
-                attrs['COLOR_0'] = self._acc(np.ascontiguousarray(C, 'u1'), 'VEC4', 5121, 34962)
+            if C is not None:   # glTF COLOR_0 is linear; the town stores authored sRGB colours
+                attrs['COLOR_0'] = self._acc(srgb_to_linear_u8(C), 'VEC4', 5121, 34962)
                 self.j['accessors'][attrs['COLOR_0']]['normalized'] = True
             p = {'attributes': attrs, 'indices': self._acc(I, 'SCALAR', 5125, 34963), 'mode': 4}
             if mat is not None: p['material'] = mat
@@ -144,6 +144,13 @@ def merge(parts):
         if len(p) > 2: Cs.append(p[2])
     out = (np.concatenate(Vs), np.concatenate(Is))
     return out + (np.concatenate(Cs),) if Cs else out
+
+
+def srgb_to_linear_u8(C):
+    """RGB channels sRGB -> linear (IEC 61966-2-1), alpha unchanged, as normalized u8."""
+    C = np.asarray(C, 'u1'); c = C[:, :3] / 255.0
+    lin = np.where(c <= .04045, c / 12.92, ((c + .055) / 1.055) ** 2.4)
+    return np.ascontiguousarray(np.column_stack([np.rint(lin * 255), C[:, 3:]]).astype('u1'))
 
 
 def vertex_coloured(m):

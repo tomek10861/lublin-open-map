@@ -144,7 +144,8 @@ def portal_zone(m=PORTAL):
 
 def owned_zone():
     """Spots owned by hand-modeled landmarks: no other generator (e.g. OSM LoD1 blocks) builds there."""
-    return unary_union([zone(), portal_zone()])
+    import city_skansen   # the open-air museum owns its buildings' spots too
+    return unary_union([zone(), portal_zone(), city_skansen.zone()])
 
 def portal_collision(m=PORTAL):
     a = math.radians(m['facing_deg']); f = np.array([math.cos(a), math.sin(a)]); s = np.array([-f[1], f[0]]); c = np.asarray(m['centre'])

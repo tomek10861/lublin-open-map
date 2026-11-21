@@ -66,6 +66,7 @@ def select(root, origin, mesh_z_offset=0.0):
     # Same rule as build-town.py's LoD2 replacement (mean wall position inside mesh_zone =
     # tile footprints shrunk 3 m): every building whose LoD2 walls are hidden is modeled here.
     tiles = _tiles(root); cover = unary_union([t['footprint'] for t in tiles]).buffer(-3.0); shapely.prepare(cover)
+    import city_skansen; skansen_lod2 = city_skansen.lod2_ids(root, origin)
     passages = []
     for road in json.loads((root / 'terrain-build/roads-with-ground-heights.json').read_text())['roads']:
         t = road['properties']
@@ -91,6 +92,7 @@ def select(root, origin, mesh_z_offset=0.0):
         if not shapely.contains_xy(cover, wx, wy): continue
         owner = _assign(np.array(fp.centroid.coords[0]), tiles)['tile']
         if b['id'] in PHOTO_LANDMARK_IDS: continue   # keeps its photo mesh (city_landmarks)
+        if b['id'] in skansen_lod2: continue   # hand-modeled (city_skansen); LoD2 stays as collision only
         if MODEL_ALL or owner in MODELED_TILES or near.intersects(fp):
             faces = [np.array(s['coordinates'], float) - [ox, oy, oz] for s in b['surfaces']
                      if s['surface'] in ('WallSurface', 'RoofSurface', 'ClosureSurface') and len(s['coordinates']) >= 3]

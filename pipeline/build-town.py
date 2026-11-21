@@ -357,6 +357,12 @@ else:
  for _v,_i,_c in _cem['visual']:store(2|256|1024,photoCount+3,_v,_i,_c)   # visual only
  for _v,_i in _cem['collision']:store(2|256|512,photoCount+3,_v,_i)      # invisible wall collision
  cemeteryReport=_cem['report'];print('cemeteries',{k:cemeteryReport[k] for k in ('graves','trees','wallsM','visualTriangles')},flush=True)
+ # Muzeum Wsi Lubelskiej (city_skansen): hand-modeled wooden architecture on the OSM outlines.
+ import city_skansen
+ _sk=city_skansen.build(root,(ox,oy,oz),lambda x,y:h_vec(np.asarray(x)+ox,np.asarray(y)+oy)-oz)
+ for _v,_i,_c in _sk['visual']:store(2|256|1024,photoCount+3,_v,_i,_c)   # visual only
+ for _v,_i in _sk['collision']:store(2|256|512,photoCount+3,_v,_i)      # invisible walls (OSM-only outlines too)
+ skansenReport=_sk['report'];print('skansen',{k:skansenReport[k] for k in ('objects','buildings','outbuildings','nodes','lod2Replaced','visualTriangles')},flush=True)
  tree_count=0
  # One mesh per tree: cat 4096 makes it a knockdown prop (falls when hit), 256 no drive surface.
  for vv,ii,colors,n in tree_meshes(root,lambda x,y:h_vec(x+ox,y+oy)-oz,street_cut,protected_buildings,per_tree=True,extra=_cem['trees']):
@@ -439,6 +445,7 @@ else:
   return _Line([c+axis*t_.min(),c+axis*t_.max()]),c
  from city_landmarks import church_lod2_ids
  _churches=church_lod2_ids(root,(ox,oy,oz));print('church LoD2 buildings',len(_churches),flush=True)
+ import city_skansen;_skansen_lod2=city_skansen.lod2_ids(root,(ox,oy,oz))   # LoD2 under a skansen model: invisible collision only
  for building in buildings:
   wall=[];roof=[]
   for surf in building['surfaces']:
@@ -469,7 +476,7 @@ else:
      if surf['surface']=='WallSurface':
       horizontal=xyz[0]if abs(normal[1])>abs(normal[0])else xyz[1];target.append(v(*xyz,horizontal/12,xyz[2]/12))
      else:target.append(v(*xyz))
-  replaced=bool(wall)and(building['id']in _modeled_ids or bool(in_zone([np.mean([q[0]for q in wall]),np.mean([q[1]for q in wall])])[0]))   # modeled buildings never keep visible LoD2 too
+  replaced=bool(wall)and(building['id']in _modeled_ids or building['id']in _skansen_lod2 or bool(in_zone([np.mean([q[0]for q in wall]),np.mean([q[1]for q in wall])])[0]))   # modeled buildings never keep visible LoD2 too
   if replaced:replacedBuildings+=1;roof=[]
   if wall:
    # LoD2 bases and the road-smoothed ground differ by decimetres; sink each
@@ -511,7 +518,8 @@ else:
  from city_landmarks import zone as landmark_zone,meshes as landmark_meshes,collision as landmark_collision
  from city_landmarks import photo_clear_zone
  from city_landmarks import portal_zone,portal_meshes,portal_collision
- _landmark=landmark_zone().union(photo_clear_zone(root,(ox,oy,oz))).union(portal_zone());shapely.prepare(_landmark)
+ import city_skansen   # Muzeum Wsi Lubelskiej: hand-modeled, owns its buildings' spots
+ _landmark=landmark_zone().union(photo_clear_zone(root,(ox,oy,oz))).union(portal_zone()).union(city_skansen.zone());shapely.prepare(_landmark)
  # Support height for loose photo pieces: terrain, or the LoD2 roof top over a footprint (2 m grid).
  import rasterio.features,rasterio.transform
  _sx0,_sy0,_sx1,_sy1=x0-ox-50,y0-oy-50,x1-ox+50,y1-oy+50
@@ -770,5 +778,5 @@ raw=body.getvalue();package=b'TOWNv002'+struct.pack('<I',len(raw))+zlib.compress
 if '--events-only' in sys.argv:
  report=previous_report.copy();report.update(events=eventReport,meshes=len(meshes),triangles=sum(len(m[3])//3 for m in meshes),packageBytes=len(package),unpackedBytes=len(raw))
 else:
- report={'cemeteries':cemeteryReport,'osmLoD1':__import__('city_modeled_buildings')._state.get('lod1Report'),'fence':{'parks':len(_park),'posts':fencePosts,'gaps':fenceGaps},'events':eventReport,'passageClearAreaM2':passageClearAreaM2,'osmCollisionWalls':{'buildings':osmWallBuildings,'edges':osmWallEdges,'passageEdgesOpen':osmPassageEdges},'mapBoundary':{'insetM':inset,'segments':boundarySegments,'heightM':7,'visible':False},'cityMesh':cityMeshReport,'streetSigns':{'plates':signCount,'names':len(sign_names),'junctionPoints':len(junction_names),'source':'OSM name (ODbL)',"atlas":[SIGN_ATLAS_W,atlas_h]},'ground':groundReport,'meshes':len(meshes),'triangles':sum(len(m[3])//3 for m in meshes),'packageBytes':len(package),'unpackedBytes':len(raw),'wallTriangles':wallTriangles,'roofTriangles':roofTriangles,'skippedDegenerateOrInvalidPolygons':skipped,'bridges':bridges,'routeLengthM':route['lengthM'],'status':'isolated native prototype, not production','orthoSource':'GUGiK WMS HighResolution Raster only','orthoCacheMPerPixel':.1,'runtimeOrthoMPerPixel':.5,'orthoAtlasTiles':len(atlas),'attribution':'Źródło: GUGiK, geoportal.gov.pl','sources':['GUGiK NMT1m2017, PL-KRON86-NH','GUGiK LoD2buildings2017 CC BY4.0','GUGiK WCS ortho','©OpenStreetMapcontributors ODbL'],'textureSettings':{'gutterPx':16,'wrap':'clamp_to_edge for ortho atlases','anisotropy':16,'mips':'generated at native upload after padding'},'remainingTextureWork':['light ortho blend at road shoulders','epoch sharpness selection must feed mosaic before final build'],'limits':['facade textures are authored substitutes, not photographic elevations','bridge elevations interpolated, need road-level validation','source city/road dates differ']}
+ report={'skansen':skansenReport,'cemeteries':cemeteryReport,'osmLoD1':__import__('city_modeled_buildings')._state.get('lod1Report'),'fence':{'parks':len(_park),'posts':fencePosts,'gaps':fenceGaps},'events':eventReport,'passageClearAreaM2':passageClearAreaM2,'osmCollisionWalls':{'buildings':osmWallBuildings,'edges':osmWallEdges,'passageEdgesOpen':osmPassageEdges},'mapBoundary':{'insetM':inset,'segments':boundarySegments,'heightM':7,'visible':False},'cityMesh':cityMeshReport,'streetSigns':{'plates':signCount,'names':len(sign_names),'junctionPoints':len(junction_names),'source':'OSM name (ODbL)',"atlas":[SIGN_ATLAS_W,atlas_h]},'ground':groundReport,'meshes':len(meshes),'triangles':sum(len(m[3])//3 for m in meshes),'packageBytes':len(package),'unpackedBytes':len(raw),'wallTriangles':wallTriangles,'roofTriangles':roofTriangles,'skippedDegenerateOrInvalidPolygons':skipped,'bridges':bridges,'routeLengthM':route['lengthM'],'status':'isolated native prototype, not production','orthoSource':'GUGiK WMS HighResolution Raster only','orthoCacheMPerPixel':.1,'runtimeOrthoMPerPixel':.5,'orthoAtlasTiles':len(atlas),'attribution':'Źródło: GUGiK, geoportal.gov.pl','sources':['GUGiK NMT1m2017, PL-KRON86-NH','GUGiK LoD2buildings2017 CC BY4.0','GUGiK WCS ortho','©OpenStreetMapcontributors ODbL'],'textureSettings':{'gutterPx':16,'wrap':'clamp_to_edge for ortho atlases','anisotropy':16,'mips':'generated at native upload after padding'},'remainingTextureWork':['light ortho blend at road shoulders','epoch sharpness selection must feed mosaic before final build'],'limits':['facade textures are authored substitutes, not photographic elevations','bridge elevations interpolated, need road-level validation','source city/road dates differ']}
 (out/'build-report.json').write_text(json.dumps(report,indent=2,ensure_ascii=False));print(json.dumps({k:v for k,v in report.items()if k!='bridges'},indent=2,ensure_ascii=False))

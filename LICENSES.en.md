@@ -59,6 +59,12 @@ are placed procedurally inside the OSM cemetery outlines. Grave forms follow wri
 (no photos or text copied): [Plastyka nagrobków](https://lipowa.cmentarz.lublin.pl/wazne-miejsca/plastyka-nagrobkow/)
 (Lipowa street cemetery) and [Style i formy](https://dormitorium.lublin.pl/28/style-i-formy.htm).
 
+The Open-Air Village Museum buildings (MIT) stand on OSM outlines. Object numbers and names come from
+the [museum's official map](https://skansen.lublin.pl/wp-content/uploads/2025/06/0270-MWL-mapa-STANDARD-A3.pdf);
+roof form, covering and wall construction from its [sector pages](https://skansen.lublin.pl/pl/ekspozycja/)
+(kept as keywords, texts not copied). Photos from Wikimedia Commons and the museum site were visual
+references only and are not included.
+
 ## Not in this repository
 
 No files from commercial games and no Google Maps / Street View imagery (used only as a visual

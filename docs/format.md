@@ -12,7 +12,7 @@ Everything in a release is plain glTF 2.0, GeoJSON, PNG/JPEG and JSON. No propri
 | **glTF** | glTF convention, Y up: `gltf = (local.x, local.z, −local.y)` | `.gltf` files |
 
 `originEPSG2180 = [746600, 381750, 180]`. All tiles share this origin, so loading several tiles needs
-no per-tile offset. The map covers about 4.9 × 3.5 km (local x −2100…2800, y −1750…1750). Float32
+no per-tile offset. The map covers about 5.3 × 3.5 km (local x −2510…2800, y −1750…1750). Float32
 precision is about 0.5 mm here, so no origin shifting is needed in any engine.
 
 Converting for a game: decide the game's up axis and unit, then apply one transform to the whole
@@ -86,7 +86,7 @@ earth: bridges are in `city/`, not in the heightmap.
 
 | Part | Size | Files |
 |---|---|---|
-| core (`city`, `collision`, `races`, `layers`, `terrain`, `textures`) | ≈ 640 MB | 88 cells |
+| core (`city`, `collision`, `races`, `layers`, `terrain`, `textures`) | ≈ 710 MB | 88 cells |
 | `photo` | ≈ 2.3 GB | up to 31 MB per tile, JPEGs up to 4096 px |
 
 For engines with texture limits, downscale photo JPEGs (e.g. to 2048 px) — UVs are normalised, so

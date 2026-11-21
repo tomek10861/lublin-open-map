@@ -22,7 +22,7 @@ export LUBLIN_WORK=$PWD/pipeline          # data is downloaded next to the scrip
 | 5 | `fetch_bridge_surfaces.py`, `build-bridge-profiles.py` | Bridge and viaduct deck heights from the surface model | GUGiK NMPT |
 | 6 | `import-city-mesh.py <tiles> --lod A|C` | Import and decimate photogrammetry tiles | City of Lublin mesh 2022 |
 | 7 | `route-plan.py`, `build-routes.py`, `profile-routes.py`, `fit-routes.py` | Plan race loops on the road graph and fit them to the walls | OSM + built city |
-| 8 | `build-town.py` | Assemble the city: surfaces, LoD2 buildings, bridges, modeled buildings (`city_modeled_buildings.py` + `facade-baker.c`), photo clean-up (`city_mesh_finish.py`), landmarks (`city_landmarks.py`), cranes (`city_cranes.py`), cemeteries (`city_cemetery.py`), trees and signs (`city_landscape.py`) | all of the above |
+| 8 | `build-town.py` | Assemble the city: surfaces, LoD2 buildings, bridges, modeled buildings (`city_modeled_buildings.py` + `facade-baker.c`), photo clean-up (`city_mesh_finish.py`), landmarks (`city_landmarks.py`), cranes (`city_cranes.py`), cemeteries (`city_cemetery.py`), the open-air museum (`city_skansen.py`, facts in `skansen/objects.json`), trees and signs (`city_landscape.py`) | all of the above |
 | 9 | `build-race-meta.py` | Street names and traffic lanes (`city_traffic.py`) | OSM |
 | 10 | `export_open_map.py` | Write the open release: glTF, GeoJSON, heightmap | stage 8–9 output |
 | 11 | `tools/screenshots.cjs`, `tools/package-release.sh` | README screenshots and release archives | release |

@@ -1,5 +1,5 @@
 {
- "boundsEPSG2180": [744500, 380000, 749400, 383500],
+ "boundsEPSG2180": [744090, 380000, 749400, 383500],
  "originEPSG2180": [746600, 381750, 180],
- "note": "East edge moved 748700 -> 749400 (2026-11-12) to include Brama Krakowska, Stare Miasto and Zamek."
+ "note": "East edge moved 748700 -> 749400 (2026-11-12) to include Brama Krakowska, Stare Miasto and Zamek. West edge moved 744500 -> 744090 (2026-11-21) to include the whole Muzeum Wsi Lubelskiej (open-air museum, way 59258969 reaches E 744198)."
 }

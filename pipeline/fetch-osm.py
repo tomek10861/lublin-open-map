@@ -11,7 +11,7 @@ def fetch(pair):
  try:
   t=E.parse(p);return {'tile':[i,j],'nodes':len(t.findall('node')),'ways':len(t.findall('way'))}
  except Exception as e:return {'tile':[i,j],'error':str(e)}
-pairs=[(i,j)for i in range(8) for j in range(4)]  # i=7: 22.57-22.58 E (Zamek, Stare Miasto)
+pairs=[(i,j)for i in range(-1,8) for j in range(4)]  # i=-1: 22.49-22.50 E (Muzeum Wsi Lubelskiej, 2026-11-21); i=7: 22.57-22.58 E (Zamek, Stare Miasto)
 with ThreadPoolExecutor(max_workers=2) as pool:
  reports=[]
  for r in pool.map(fetch,pairs):reports.append(r);print(json.dumps(r),flush=True)

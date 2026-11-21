@@ -9,11 +9,15 @@ from rasterio.transform import from_origin
 from rasterio.windows import Window
 from rasterio.enums import Resampling
 root=Path(__import__('os').environ.get('LUBLIN_WORK',str(Path(__file__).resolve().parent))+'/ortho-high');cache=root/'cache';runtime=root/'runtime';cache.mkdir(parents=True,exist_ok=True);runtime.mkdir(exist_ok=True)
-base='https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/HighResolution';xmin,ymin,xmax,ymax=json.loads((Path(__file__).resolve().parent/'roi.json').read_text())['boundsEPSG2180'];res=.1;width,height=round((xmax-xmin)/res),round((ymax-ymin)/res)
+base='https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/HighResolution';xmin,ymin,xmax,ymax=json.loads((Path(__file__).resolve().parent/'roi.json').read_text())['boundsEPSG2180'];res=.1
+# Request grid anchored at the original west edge (744500, 2048 px = 204.8 m columns): an ROI
+# extension only fetches the new columns; cached tiles keep their exact URLs.
+GRID_X0=744500.0;gx=GRID_X0-math.ceil(max(0,GRID_X0-xmin)/204.8)*204.8
+width,height=round((xmax-gx)/res),round((ymax-ymin)/res)
 requests=[]
 for row in range(math.ceil(height/2048)):
  for col in range(math.ceil(width/2048)):
-  w,h=min(2048,width-col*2048),min(2048,height-row*2048);x=xmin+col*2048*res;top=ymax-row*2048*res
+  w,h=min(2048,width-col*2048),min(2048,height-row*2048);x=gx+col*2048*res;top=ymax-row*2048*res
   params={'SERVICE':'WMS','VERSION':'1.1.1','REQUEST':'GetMap','LAYERS':'Raster','STYLES':'','SRS':'EPSG:2180','BBOX':f'{x:.3f},{top-h*res:.3f},{x+w*res:.3f},{top:.3f}','WIDTH':w,'HEIGHT':h,'FORMAT':'image/jpeg'}
   url=base+'?'+urlencode(params);key=hashlib.sha256(url.encode()).hexdigest();requests.append({'row':row,'col':col,'width':w,'height':h,'url':url,'file':key+'.jpg','bboxEPSG2180':[x,top-h*res,x+w*res,top]})
 def fetch(spec):
@@ -42,7 +46,7 @@ if '--runtime-only' not in sys.argv:
 mosaic=root/'lublin-ortho-0.1m.tif'
 with rasterio.Env(GDAL_CACHEMAX=64):
  if '--runtime-only' not in sys.argv:
-  with rasterio.open(mosaic,'w',driver='GTiff',width=width,height=height,count=3,dtype='uint8',crs='EPSG:2180',transform=from_origin(xmin,ymax,res,res),tiled=True,blockxsize=512,blockysize=512,compress='JPEG',jpeg_quality=90,photometric='YCBCR',BIGTIFF='IF_SAFER',num_threads=2)as dst:
+  with rasterio.open(mosaic,'w',driver='GTiff',width=width,height=height,count=3,dtype='uint8',crs='EPSG:2180',transform=from_origin(gx,ymax,res,res),tiled=True,blockxsize=512,blockysize=512,compress='JPEG',jpeg_quality=90,photometric='YCBCR',BIGTIFF='IF_SAFER',num_threads=2)as dst:
    for record in results:
     with Image.open(cache/record['file'])as im:a=np.asarray(im.convert('RGB'))
     dst.write(a.transpose(2,0,1),window=Window(record['col']*2048,record['row']*2048,record['width'],record['height']))
@@ -56,7 +60,7 @@ with rasterio.Env(GDAL_CACHEMAX=64):
     x=xmin+col*2032;top=ymax-row*2032;w=min(2032,xmax-x);h=min(2032,top-ymin)
     if w<=0 or h<=0:continue
     #0.5m runtime texels; max4000pixels per texture, native mipmaps at upload.
-    a=src.read(window=Window(round((x-xmin)/res),round((ymax-top)/res),round(w/res),round(h/res)),out_shape=(3,round(h/.5),round(w/.5)),resampling=Resampling.average)
+    a=src.read(window=Window(round((x-gx)/res),round((ymax-top)/res),round(w/res),round(h/res)),out_shape=(3,round(h/.5),round(w/.5)),resampling=Resampling.average)
     contentH,contentW=a.shape[1:];tw=1;th=1
     while tw<contentW+32:tw*=2
     while th<contentH+32:th*=2

@@ -84,6 +84,12 @@ pomnik Curie-Skłodowskiej, żurawie, ławki, drzewa, znaki, nawierzchnie, fasad
 i ogrodzenia cmentarzy) są na MIT. Ich położenie i wymiary pochodzą z danych GUGiK i OSM;
 nagrobki rozmieszczono proceduralnie wewnątrz obrysów cmentarzy z OSM.
 
+Budynki Muzeum Wsi Lubelskiej (MIT) stoją na obrysach z OSM. Numery i nazwy obiektów pochodzą
+z [oficjalnej mapy muzeum](https://skansen.lublin.pl/wp-content/uploads/2025/06/0270-MWL-mapa-STANDARD-A3.pdf),
+a forma dachu, pokrycie i konstrukcja ścian ze [stron sektorów](https://skansen.lublin.pl/pl/ekspozycja/)
+(zapisane jako słowa kluczowe, bez kopiowania tekstów). Zdjęcia z Wikimedia Commons i ze strony
+muzeum służyły wyłącznie za odniesienie wizualne; nie zawarto ich w repozytorium.
+
 Formy nagrobków wzorowano na opisach (bez kopiowania zdjęć ani tekstów):
 [Plastyka nagrobków](https://lipowa.cmentarz.lublin.pl/wazne-miejsca/plastyka-nagrobkow/)
 (cmentarz przy ul. Lipowej) i [Style i formy](https://dormitorium.lublin.pl/28/style-i-formy.htm).

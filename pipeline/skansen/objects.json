@@ -1,0 +1,1832 @@
+{
+ "source": "Muzeum Wsi Lubelskiej, official map 0270-MWL-mapa-STANDARD-A3.pdf (2025-06): numbers and names; sector pages skansen.lublin.pl/pl/ekspozycja/*: architectural facts (paraphrased keywords only, texts not copied); OSM (ODbL): outlines",
+ "retrieved": "2026-11-21",
+ "objects": [
+  {
+   "id": "MWL-01",
+   "mapNo": 1,
+   "name": "Wiatrak z Zygmuntowa",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119434",
+   "osmName": "Wiatrak z Zygmuntowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504901,
+    51.262216
+   ],
+   "footprintM2": 59,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Wiatrak z Zygmuntowa"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "deskami",
+     "dranicami"
+    ],
+    "walls": [
+     "podcieniem",
+     "podcieniu",
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-02",
+   "mapNo": 2,
+   "name": "Kuźnia z Urzędowa",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119428",
+   "osmName": "Kuźnia z Urzędowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505591,
+    51.261813
+   ],
+   "footprintM2": 30,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Zagroda z Urzędowa"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "blachą",
+     "słomą"
+    ],
+    "walls": [
+     "podcień",
+     "węgłowy"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-03",
+   "mapNo": 3,
+   "name": "Kapliczka z Kolanówki",
+   "sector": "Wyżyna Lubelska",
+   "osm": "node/934694739",
+   "osmName": "Kapliczka z Kolanówki",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505385,
+    51.261643
+   ],
+   "footprintM2": null,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Kapliczka z Kolanówki"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-04",
+   "mapNo": 4,
+   "name": "Zagroda z Urzędowa",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119437",
+   "osmName": "Zagroda z Urzędowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505133,
+    51.261658
+   ],
+   "footprintM2": 149,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Zagroda z Urzędowa"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "blachą",
+     "słomą"
+    ],
+    "walls": [
+     "podcień",
+     "węgłowy"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-05",
+   "mapNo": 5,
+   "name": "Studnia z Błażka",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/668691012",
+   "osmName": "Studnia z Błażka",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505118,
+    51.261483
+   ],
+   "footprintM2": 16,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Studnia z Błażka"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "słomą"
+    ],
+    "walls": [
+     "węgłowana"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-06",
+   "mapNo": 6,
+   "name": "Zagroda z Niemiec",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119422",
+   "osmName": "Zagroda z Niemiec",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504725,
+    51.261465
+   ],
+   "footprintM2": 45,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Zagroda z Niemiec"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "słomianym",
+     "słomą"
+    ],
+    "walls": [
+     "murowana",
+     "murowaną",
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-07",
+   "mapNo": 7,
+   "name": "Zagroda z Żukowa",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119418",
+   "osmName": "Zagroda z Żukowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504565,
+    51.26119
+   ],
+   "footprintM2": 73,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Zagroda z Żukowa"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "słomianym",
+     "słomy",
+     "słomą"
+    ],
+    "walls": [
+     "murowana",
+     "podcieniem",
+     "węgłowej",
+     "zrębowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-08",
+   "mapNo": 8,
+   "name": "Chałupa z Tarnogóry",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119405",
+   "osmName": "Chałupa z Tarnogóry",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504969,
+    51.261086
+   ],
+   "footprintM2": 58,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Chałupa z Tarnogóry"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "słomą"
+    ],
+    "walls": [
+     "murowana",
+     "węgłowane"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-09",
+   "mapNo": 9,
+   "name": "Olejarnia z Bogucina",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119416",
+   "osmName": "Olejarnia z Bogucina",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505175,
+    51.261249
+   ],
+   "footprintM2": 26,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Olejarnia z Bogucina"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "słomą"
+    ],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-10",
+   "mapNo": 10,
+   "name": "Zagroda z Żabna",
+   "sector": "Wyżyna Lubelska",
+   "osm": "way/80119414",
+   "osmName": "Zagroda z Żabna",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505552,
+    51.261339
+   ],
+   "footprintM2": 68,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/wyzyna-lubelska/",
+    "heading": "Zagroda z Żabna"
+   },
+   "facts": {
+    "roof_form": [
+     "naczółkowym"
+    ],
+    "roof_cover": [
+     "słomą"
+    ],
+    "walls": [
+     "ganek",
+     "gankiem"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-11",
+   "mapNo": 11,
+   "name": "Dworek z Huty Dzierążyńskiej",
+   "sector": "Zespół dworski",
+   "osm": "way/80119929",
+   "osmName": "Dwór z Huty Dzierążyńskiej",
+   "osmMatch": 0.96,
+   "wgs84": [
+    22.506939,
+    51.261254
+   ],
+   "footprintM2": 180,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": "Dwór z Huty Dzierążyńskiej"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "gankiem",
+     "tynkowany",
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-12",
+   "mapNo": 12,
+   "name": "Spichlerz z Piotrowic",
+   "sector": "Zespół dworski",
+   "osm": "way/80119930",
+   "osmName": "Spichlerz z Piotrowic",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.507423,
+    51.261218
+   ],
+   "footprintM2": 222,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": "Spichlerz dworski z Piotrowic Wielkich"
+   },
+   "facts": {
+    "roof_form": [
+     "naczółkowy"
+    ],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "podcieniem",
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-13",
+   "mapNo": 13,
+   "name": "Spichlerz z Turki",
+   "sector": "Zespół dworski",
+   "osm": "way/80119922",
+   "osmName": "Spichlerz z Turki",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.507306,
+    51.260613
+   ],
+   "footprintM2": 82,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": "Spichlerz dworski z Turki"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "podcienia"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-14",
+   "mapNo": 14,
+   "name": "Czworak z Brusa Starego",
+   "sector": "Zespół dworski",
+   "osm": "way/80119915",
+   "osmName": "Czworak z Brusa Starego",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.507651,
+    51.260359
+   ],
+   "footprintM2": 152,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": "Czworak z Brusa Starego"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-15",
+   "mapNo": 15,
+   "name": "Dwór z Żyrzyna",
+   "sector": "Zespół dworski",
+   "osm": "way/80119935",
+   "osmName": "Dwór z Żyrzyna",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.506967,
+    51.259944
+   ],
+   "footprintM2": 295,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": "Dwór z Żyrzyna"
+   },
+   "facts": {
+    "roof_form": [
+     "mansardowym",
+     "łamanym"
+    ],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "ganki",
+     "tynkowany",
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-16",
+   "mapNo": 16,
+   "name": "Brama z Łańcuchowa",
+   "sector": "Zespół dworski",
+   "osm": "way/1054037711",
+   "osmName": "Brama z Łańcuchowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.506293,
+    51.260817
+   ],
+   "footprintM2": null,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": "Brama z Łańcuchowa"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "arkadowa"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-17",
+   "mapNo": 17,
+   "name": "Ule",
+   "sector": "Zespół dworski",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.22,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-18",
+   "mapNo": 18,
+   "name": "Brama z Firleja",
+   "sector": "Zespół dworski",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.61,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/zespol-dworski/",
+    "heading": "Brama z Łańcuchowa"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "arkadowa"
+    ]
+   },
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-19",
+   "mapNo": 19,
+   "name": "Chałupa z Gozdu Lipińskiego",
+   "sector": "Roztocze",
+   "osm": "way/80119934",
+   "osmName": "Chałupa z Gozdu Lipińskiego",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.508374,
+    51.25991
+   ],
+   "footprintM2": 29,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Chałupa z Gozdu Lipińskiego"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "strzechą"
+    ],
+    "walls": [
+     "wieńcowe",
+     "węgłowane"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-20",
+   "mapNo": 20,
+   "name": "Zagroda z Korytkowa Dużego",
+   "sector": "Roztocze",
+   "osm": "way/80119925",
+   "osmName": "Zagroda z Korytkowa Dużego",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.509063,
+    51.260235
+   ],
+   "footprintM2": 88,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Zagroda z Korytkowa Dużego"
+   },
+   "facts": {
+    "roof_form": [
+     "czterospadowym"
+    ],
+    "roof_cover": [
+     "dranic",
+     "słomą"
+    ],
+    "walls": [
+     "murowane",
+     "wieńcowej",
+     "węgłowa",
+     "węgłowanych"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-21",
+   "mapNo": 21,
+   "name": "Kapliczka z Korytkowa Dużego",
+   "sector": "Roztocze",
+   "osm": "node/5760308362",
+   "osmName": "Kapliczka z Korytkowa Dużego",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.508945,
+    51.259925
+   ],
+   "footprintM2": null,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Kapliczka z Korytkowa Dużego"
+   },
+   "facts": {
+    "roof_form": [
+     "czterospadowy"
+    ],
+    "roof_cover": [
+     "dranicami"
+    ],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-22",
+   "mapNo": 22,
+   "name": "Zagroda z Teodorówki",
+   "sector": "Roztocze",
+   "osm": "way/80119932",
+   "osmName": "Zagroda z Teodorówki",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.509044,
+    51.259709
+   ],
+   "footprintM2": 90,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Zagroda z Teodorówki"
+   },
+   "facts": {
+    "roof_form": [
+     "czterospadowy"
+    ],
+    "roof_cover": [
+     "słomianym"
+    ],
+    "walls": [
+     "ganek",
+     "gankiem",
+     "murowane",
+     "murowaną",
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-23",
+   "mapNo": 23,
+   "name": "Zagroda z Bukowej",
+   "sector": "Roztocze",
+   "osm": "way/80119940",
+   "osmName": "Zagroda z Bukowej",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.509451,
+    51.259683
+   ],
+   "footprintM2": 92,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Zagroda z Bukowej"
+   },
+   "facts": {
+    "roof_form": [
+     "dwuspadowym",
+     "dwuspadowymi"
+    ],
+    "roof_cover": [
+     "dranic",
+     "słomą"
+    ],
+    "walls": [
+     "ganek",
+     "murowane",
+     "wieńcowej",
+     "węgłowanych"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-24",
+   "mapNo": 24,
+   "name": "Budynek z Bełżca",
+   "sector": "Roztocze",
+   "osm": "way/80119916",
+   "osmName": "Dom z Bełżca",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.509415,
+    51.260037
+   ],
+   "footprintM2": 96,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Budynek z Bełżca"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "gontem"
+    ],
+    "walls": [
+     "murowaną",
+     "węgłowej"
+    ]
+   },
+   "status": "matched-manual"
+  },
+  {
+   "id": "MWL-25",
+   "mapNo": 25,
+   "name": "Kuźnia z Ciosm",
+   "sector": "Roztocze",
+   "osm": "way/80119936",
+   "osmName": "Kuźnia z Ciosm",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.51025,
+    51.259537
+   ],
+   "footprintM2": 25,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Kuźnia z Ciosm"
+   },
+   "facts": {
+    "roof_form": [
+     "dwuspadowy"
+    ],
+    "roof_cover": [
+     "deskami"
+    ],
+    "walls": [
+     "podcieniowego",
+     "węgłowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-26",
+   "mapNo": 26,
+   "name": "Cerkiew z Tarnoszyna",
+   "sector": "Roztocze",
+   "osm": "way/80119945",
+   "osmName": "Cerkiew pw. Narodzenia Najświętszej Marii Panny",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.510603,
+    51.259494
+   ],
+   "footprintM2": 124,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Greckokatolicki zespół sakralny z cerkwią z Tarnoszyna"
+   },
+   "facts": {
+    "roof_form": [
+     "kopuły (3)"
+    ],
+    "roof_cover": [
+     "gont (adaptacja muzealna)"
+    ],
+    "walls": [
+     "węgłowa",
+     "trójdzielna: przedsionek, nawa, prezbiterium + 2 zakrystie"
+    ],
+    "date": "1759"
+   },
+   "status": "matched-manual"
+  },
+  {
+   "id": "MWL-27",
+   "mapNo": 27,
+   "name": "Dzwonnica z Lubyczy-Kniazie",
+   "sector": "Roztocze",
+   "osm": "way/403951863",
+   "osmName": "Dzwonnica z Lubyczy-Kniazie",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.510462,
+    51.259318
+   ],
+   "footprintM2": 20,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Greckokatolicki zespół sakralny z cerkwią z Tarnoszyna"
+   },
+   "facts": {
+    "roof_form": [
+     "namiotowy ośmiopołaciowy",
+     "szerokie zadaszenie"
+    ],
+    "roof_cover": [],
+    "walls": [
+     "drewniana na kamiennej podmurówce",
+     "dwukondygnacyjna",
+     "arkadki w górnej kondygnacji"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-28",
+   "mapNo": 28,
+   "name": "Parkiet na potańcówki",
+   "sector": "Roztocze",
+   "osm": "node/9961379177",
+   "osmName": "Miejsce potańcówek",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.509217,
+    51.259863
+   ],
+   "footprintM2": null,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched-manual"
+  },
+  {
+   "id": "MWL-29",
+   "mapNo": 29,
+   "name": "Zagroda z Huty Dzierążyńskiej",
+   "sector": "Roztocze",
+   "osm": "way/80119912",
+   "osmName": "Zagroda z Huty Dzierążyńskiej",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.50823,
+    51.258844
+   ],
+   "footprintM2": 66,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Zagroda z Huty Dzierążyńskiej"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "słomą"
+    ],
+    "walls": [
+     "węgłowa",
+     "węgłowym"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-30",
+   "mapNo": 30,
+   "name": "Zagroda z Błonia",
+   "sector": "Roztocze",
+   "osm": "way/80119913",
+   "osmName": "Zagroda z Błonia",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.507901,
+    51.258901
+   ],
+   "footprintM2": 58,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Zagroda z Błonia"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "słomą"
+    ],
+    "walls": [
+     "węgłowa",
+     "węgłowy"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-31",
+   "mapNo": 31,
+   "name": "Kapliczka ze Słobody",
+   "sector": "Roztocze",
+   "osm": "node/5760308361",
+   "osmName": "Kapliczka ze Słobody",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.508006,
+    51.258695
+   ],
+   "footprintM2": null,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/roztocze/",
+    "heading": "Kapliczka ze Słobody"
+   },
+   "facts": {
+    "roof_form": [
+     "dwuspadowym",
+     "hełmie",
+     "wieżyczką"
+    ],
+    "roof_cover": [
+     "blachą"
+    ],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-32",
+   "mapNo": 32,
+   "name": "Kołodziejnia z Bełżyc",
+   "sector": "Miasteczko",
+   "osm": "way/1053274197",
+   "osmName": "Kołodziejnia z Bełżyc",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.503796,
+    51.260603
+   ],
+   "footprintM2": 36,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": "Kołodziejnia z Bełżyc"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-33",
+   "mapNo": 33,
+   "name": "Domy z Siedliszcza",
+   "sector": "Miasteczko",
+   "osm": "way/984810974",
+   "osmName": "Domy z Siedliszcza",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504106,
+    51.26064
+   ],
+   "footprintM2": 324,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-34",
+   "mapNo": 34,
+   "name": "Restauracja z Zemborzyc",
+   "sector": "Miasteczko",
+   "osm": "way/403951853",
+   "osmName": "Restauracja z Zemborzyc",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.503998,
+    51.260839
+   ],
+   "footprintM2": 131,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": "Restauracja z Zemborzyc"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-35",
+   "mapNo": 35,
+   "name": "Szkoła z Bobrownik",
+   "sector": "Miasteczko",
+   "osm": "way/403951859",
+   "osmName": "Szkoła z Bobrownik",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504346,
+    51.2609
+   ],
+   "footprintM2": 172,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-36",
+   "mapNo": 36,
+   "name": "Ratusz z Głuska",
+   "sector": "Miasteczko",
+   "osm": "way/403951860",
+   "osmName": "Ratusz z Głuska",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504579,
+    51.260558
+   ],
+   "footprintM2": 275,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": "Ratusz z Głuska"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-37",
+   "mapNo": 37,
+   "name": "Domy podcieniowe z Wojstławic",
+   "sector": "Miasteczko",
+   "osm": "way/403951862",
+   "osmName": "Domy z Wojsławic",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.50483,
+    51.260473
+   ],
+   "footprintM2": 188,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched-manual"
+  },
+  {
+   "id": "MWL-38",
+   "mapNo": 38,
+   "name": "Dom z Wąwolnicy",
+   "sector": "Miasteczko",
+   "osm": "way/403951855",
+   "osmName": "Dom z Wąwolnicy",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505044,
+    51.26044
+   ],
+   "footprintM2": 114,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": "Dom z Wąwolnicy"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-39",
+   "mapNo": 39,
+   "name": "Remiza z Wilkowa",
+   "sector": "Miasteczko",
+   "osm": "way/403951856",
+   "osmName": "Remiza z Wilkowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504681,
+    51.260796
+   ],
+   "footprintM2": 110,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-40",
+   "mapNo": 40,
+   "name": "Areszt z Samoklęsk",
+   "sector": "Miasteczko",
+   "osm": "way/403951858",
+   "osmName": "Areszt z Samoklęsk",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504803,
+    51.260697
+   ],
+   "footprintM2": 67,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": "Areszt z Samoklęsk"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-41",
+   "mapNo": 41,
+   "name": "Stodoła z Kamionki",
+   "sector": "Miasteczko",
+   "osm": "way/403951861",
+   "osmName": "Stodoła z Kamionki",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505042,
+    51.260804
+   ],
+   "footprintM2": 237,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": "Stodoła z Kamionki"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-42",
+   "mapNo": 42,
+   "name": "Stodoła z Tyszowiec",
+   "sector": "Miasteczko",
+   "osm": "way/403951857",
+   "osmName": "Stodoła z Tyszowiec",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505281,
+    51.260759
+   ],
+   "footprintM2": 106,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": "Stodoła z Kamionki"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-43",
+   "mapNo": 43,
+   "name": "Okólnik z Ostrowa Lubelskiego",
+   "sector": "Miasteczko",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.6,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-44",
+   "mapNo": 44,
+   "name": "Figura „Boża Męka”",
+   "sector": "Miasteczko",
+   "osm": "node/9740061390",
+   "osmName": "Boża Męka",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.50579,
+    51.260425
+   ],
+   "footprintM2": null,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched-manual"
+  },
+  {
+   "id": "MWL-45",
+   "mapNo": 45,
+   "name": "Rynek ze studnią",
+   "sector": "Miasteczko",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.52,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-46",
+   "mapNo": 46,
+   "name": "Kawiarnia",
+   "sector": "Miasteczko",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.56,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-47",
+   "mapNo": 47,
+   "name": "Jatki",
+   "sector": "Miasteczko",
+   "osm": "way/1054037703",
+   "osmName": "Jatki",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504666,
+    51.260055
+   ],
+   "footprintM2": 15,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-48",
+   "mapNo": 48,
+   "name": "Dzwonnica z Motycza",
+   "sector": "Miasteczko",
+   "osm": "way/185122340",
+   "osmName": "Dzwonnica z Motycza",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504824,
+    51.259974
+   ],
+   "footprintM2": 21,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-49",
+   "mapNo": 49,
+   "name": "Kościół z Matczyna",
+   "sector": "Miasteczko",
+   "osm": "way/80119928",
+   "osmName": "Kościół z Matczyna",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.50499,
+    51.25982
+   ],
+   "footprintM2": 147,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-50",
+   "mapNo": 50,
+   "name": "Plebania z Żeszczynki",
+   "sector": "Miasteczko",
+   "osm": "way/80119927",
+   "osmName": "Plebania z Żeszczynki",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505329,
+    51.259904
+   ],
+   "footprintM2": 198,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-51",
+   "mapNo": 51,
+   "name": "Spichlerz z Wrzelowca",
+   "sector": "Miasteczko",
+   "osm": "way/80119926",
+   "osmName": "Spichlerz z Wrzelowca",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505546,
+    51.259716
+   ],
+   "footprintM2": 50,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-52",
+   "mapNo": 52,
+   "name": "Lapidarium cmentarne",
+   "sector": "Miasteczko",
+   "osm": "way/668692331",
+   "osmName": "Lapidarium",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.505434,
+    51.259434
+   ],
+   "footprintM2": 1398,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched-manual"
+  },
+  {
+   "id": "MWL-53",
+   "mapNo": 53,
+   "name": "Krzyż z Leokadiowa",
+   "sector": "Miasteczko",
+   "osm": "node/1229801697",
+   "osmName": "Krzyż z Leokadiowa (kopia)",
+   "osmMatch": 0.86,
+   "wgs84": [
+    22.50688,
+    51.259365
+   ],
+   "footprintM2": null,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-54",
+   "mapNo": 54,
+   "name": "Stajnia podworska",
+   "sector": "Miasteczko",
+   "osm": "way/80119956",
+   "osmName": "Stajnia podworska",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.503351,
+    51.260019
+   ],
+   "footprintM2": 491,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/miasteczko/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  },
+  {
+   "id": "MWL-55",
+   "mapNo": 55,
+   "name": "Zagroda z Chrząchowa",
+   "sector": "Powiśle",
+   "osm": "way/80119958",
+   "osmName": "Zagroda z Chrząchowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.502464,
+    51.259585
+   ],
+   "footprintM2": 58,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Chrząchowa"
+   },
+   "facts": {
+    "roof_form": [
+     "łamanego"
+    ],
+    "roof_cover": [],
+    "walls": [
+     "murowana"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-56",
+   "mapNo": 56,
+   "name": "Zagroda dla królików",
+   "sector": "Powiśle",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.67,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Kaliszan"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": [
+     "murowana",
+     "murowany"
+    ]
+   },
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-57",
+   "mapNo": 57,
+   "name": "Zagroda z Janiszowa",
+   "sector": "Powiśle",
+   "osm": "way/80119951",
+   "osmName": "Zagroda z Janiszowa",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.501947,
+    51.259225
+   ],
+   "footprintM2": 55,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Janiszowa"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": [
+     "sumikowo-łątkowej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-58",
+   "mapNo": 58,
+   "name": "Pszczoły - Skansenowa pasieka",
+   "sector": "Powiśle",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.43,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-59",
+   "mapNo": 59,
+   "name": "Zagroda z Brzezin",
+   "sector": "Powiśle",
+   "osm": "way/80119953",
+   "osmName": "Zagroda z Brzezin",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.502279,
+    51.258718
+   ],
+   "footprintM2": 96,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Brzezin"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-60",
+   "mapNo": 60,
+   "name": "Zagroda z Głodna",
+   "sector": "Powiśle",
+   "osm": "way/80119954",
+   "osmName": "Zagroda z Głodna",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.503076,
+    51.258626
+   ],
+   "footprintM2": 197,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Głodna"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": [
+     "murowana",
+     "murowany"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-61",
+   "mapNo": 61,
+   "name": "Zagroda z Karczmisk",
+   "sector": "Powiśle",
+   "osm": "way/80119949",
+   "osmName": "Zagroda z Karczmisk",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.504489,
+    51.25821
+   ],
+   "footprintM2": 54,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Kaliszan"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": [
+     "murowana",
+     "murowany"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-62",
+   "mapNo": 62,
+   "name": "Zagroda z Kaliszan",
+   "sector": "Powiśle",
+   "osm": "way/80119942",
+   "osmName": "Chałupa z Kaliszan",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.506115,
+    51.257853
+   ],
+   "footprintM2": 59,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Kaliszan"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": [
+     "murowana",
+     "murowany"
+    ]
+   },
+   "status": "matched-manual"
+  },
+  {
+   "id": "MWL-63",
+   "mapNo": 63,
+   "name": "Owce",
+   "sector": "Powiśle",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.32,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-64",
+   "mapNo": 64,
+   "name": "Punkt widokowy",
+   "sector": "Powiśle",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.4,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-65",
+   "mapNo": 65,
+   "name": "Brogi",
+   "sector": "Powiśle",
+   "osm": "way/668688332",
+   "osmName": "Bróg",
+   "osmMatch": "manual",
+   "wgs84": [
+    22.503163,
+    51.259693
+   ],
+   "footprintM2": 21,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched-manual",
+   "note": "OSM: dwa obiekty \"Bróg\" (way/668688332, way/668688333)"
+  },
+  {
+   "id": "MWL-66",
+   "mapNo": 66,
+   "name": "Kapliczka z Leszczyn",
+   "sector": "Powiśle",
+   "osm": "node/9778590748",
+   "osmName": "Kapliczka z Leszczyny",
+   "osmMatch": 0.98,
+   "wgs84": [
+    22.504568,
+    51.258633
+   ],
+   "footprintM2": null,
+   "inMap": false,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Kapliczka z Leszczyny"
+   },
+   "facts": {
+    "roof_form": [
+     "dwuspadowym"
+    ],
+    "roof_cover": [
+     "blachą"
+    ],
+    "walls": []
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-67",
+   "mapNo": 67,
+   "name": "Zagroda dla koni",
+   "sector": "Powiśle",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.75,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/powisle/",
+    "heading": "Zagroda z Kaliszan"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [],
+    "walls": [
+     "murowana",
+     "murowany"
+    ]
+   },
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-68",
+   "mapNo": 68,
+   "name": "Remiza z Bedlna",
+   "sector": "Podlasie",
+   "osm": "way/185122344",
+   "osmName": "Remiza z Bedlna",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.50856,
+    51.257847
+   ],
+   "footprintM2": 128,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/podlasie/",
+    "heading": "Firehouse from Bedlno"
+   },
+   "facts": {
+    "roof_form": [],
+    "roof_cover": [
+     "papa (felt-covered)"
+    ],
+    "walls": [
+     "drewniana, szerokofrontowa",
+     "bez wieży obserwacyjnej"
+    ]
+   },
+   "status": "matched"
+  },
+  {
+   "id": "MWL-69",
+   "mapNo": 69,
+   "name": "Rzeźba dzika",
+   "sector": "Podlasie",
+   "osm": null,
+   "osmName": null,
+   "osmMatch": 0.57,
+   "wgs84": null,
+   "footprintM2": null,
+   "inMap": null,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/podlasie/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "needs-manual-identification"
+  },
+  {
+   "id": "MWL-70",
+   "mapNo": 70,
+   "name": "Kapliczka ze Żmijowisk",
+   "sector": "Podlasie",
+   "osm": "node/9737918263",
+   "osmName": "Kapliczka ze Żmijowisk",
+   "osmMatch": 1.0,
+   "wgs84": [
+    22.505464,
+    51.258337
+   ],
+   "footprintM2": null,
+   "inMap": true,
+   "description": {
+    "page": "https://skansen.lublin.pl/pl/ekspozycja/podlasie/",
+    "heading": null
+   },
+   "facts": {},
+   "status": "matched"
+  }
+ ]
+}

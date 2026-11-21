@@ -1,8 +1,8 @@
 # Lublin Open Map
 
-**An open 3D map of central Lublin, Poland, for games and engines.** About 5 × 3.5 km of the city:
+**An open 3D map of central Lublin, Poland, for games and engines.** About 5.3 × 3.5 km of the city:
 photogrammetry of the Old Town and city centre, 3D buildings, streets with their real surfaces,
-viaducts with piers, landmarks, breakable trees and signs, collision meshes, four race courses and
+viaducts with piers, landmarks, the Open-Air Village Museum, breakable trees and signs, collision meshes, four race courses and
 a traffic-lane network. Everything in open formats (glTF 2.0, GeoJSON, PNG), with guides for
 open-source engines, simulators and classic games.
 
@@ -21,8 +21,9 @@ open-source engines, simulators and classic games.
 | ![Concert Shell](screenshots/muszla-saski.jpg) **Concert Shell, Saxon Garden** | ![CSK](screenshots/csk.jpg) **Centre for the Meeting of Cultures** |
 | ![Curie Square](screenshots/umcs-curie.jpg) **Maria Curie-Skłodowska Square, UMCS** | ![Viaduct](screenshots/wiadukt-solidarnosci.jpg) **Viaduct on Solidarności Avenue** |
 | ![Orthodox church](screenshots/cerkiew-warszawska.jpg) **Orthodox church by Warszawska Avenue** (Open-Air Village Museum) | ![Old Town top view](screenshots/stare-miasto-z-gory.jpg) **Old Town, top view** |
-| ![Lipowa street cemetery](screenshots/cmentarz-lipowa.jpg) **Lipowa street cemetery** (procedural graves) | |
-| ![Whole area](screenshots/miasto-z-gory.jpg) **The whole map** (≈ 4.9 × 3.5 km) | ![Race courses](screenshots/trasy-wyscigow.jpg) **Four race courses** (3.5–5.5 km) |
+| ![Lipowa street cemetery](screenshots/cmentarz-lipowa.jpg) **Lipowa street cemetery** (procedural graves) | ![Żyrzyn manor](screenshots/skansen-dwor.jpg) **Lublin Open-Air Village Museum:** the Żyrzyn manor house |
+| ![Small town](screenshots/skansen-miasteczko.jpg) **Open-Air Village Museum:** the small town and the Matczyn church | ![Windmill](screenshots/skansen-wiatrak.jpg) **Open-Air Village Museum:** the Zygmuntów windmill |
+| ![Whole area](screenshots/miasto-z-gory.jpg) **The whole map** (≈ 5.3 × 3.5 km) | ![Race courses](screenshots/trasy-wyscigow.jpg) **Four race courses** (3.5–5.5 km) |
 
 Screenshots are rendered from the release data with the repository's three.js viewer (`viewer/`)
 by `tools/screenshots.cjs`.
@@ -31,14 +32,14 @@ by `tools/screenshots.cjs`.
 
 | Part | Content |
 |---|---|
-| `city/` | 88 cells of 512 m: terrain with orthophoto, streets (asphalt, setts on pedestrian streets, paving slabs), LoD2 buildings, viaducts and footbridges, city gates with arches, Concert Shell, CSK, Portal, monuments, the Lipowa street cemetery and the other Christian cemeteries (alleys, graves, walls), cranes, street-name plates, **14,388 trees and signs** as separate breakable objects |
-| `photo/` | 122 photogrammetry tiles (2022) of the centre, with buildings rebuilt from LoD2 and textured from the photos; buildings newer than LoD2 (from OpenStreetMap) as LoD1 blocks |
+| `city/` | 88 cells of 512 m: terrain with orthophoto, streets (asphalt, setts on pedestrian streets, paving slabs), LoD2 buildings, viaducts and footbridges, city gates with arches, Concert Shell, CSK, Portal, monuments, the Open-Air Village Museum (83 museum objects), the Lipowa street cemetery and the other Christian cemeteries (alleys, graves, walls), cranes, street-name plates, **14,456 trees and signs** as separate breakable objects |
+| `photo/` | 123 photogrammetry tiles (2022) of the centre, with buildings rebuilt from LoD2 and textured from the photos; buildings newer than LoD2 (from OpenStreetMap) as LoD1 blocks |
 | `collision/` | collision meshes: drivable surfaces and walls (buildings, viaduct parapets, landmark outlines) |
 | `races/` | barriers and markers for the four race courses |
-| `layers/` | GeoJSON: 428 named streets, 3,568 traffic lanes, 4 race courses, trees and signs, 50 landmarks, 7,937 building footprints with heights |
+| `layers/` | GeoJSON: 428 named streets, 3,803 traffic lanes, 4 race courses, trees and signs, 50 landmarks, 8,588 building footprints with heights |
 | `terrain/` | 16-bit heightmap, 5 m per pixel |
 
-Size: ≈ 690 MB without photogrammetry, 2.1 GB with it. Format: [docs/format.md](docs/format.md).
+Size: ≈ 710 MB without photogrammetry, 2.3 GB with it. Format: [docs/format.md](docs/format.md).
 
 ## Quick start
 
@@ -98,6 +99,12 @@ The whole pipeline (downloading GUGiK, OSM and city mesh data, building the city
   and forms do not match the real plots. The forms (cast-iron and stone crosses, obelisks, steles,
   broken columns, sarcophagi, figures) follow descriptions of the Lipowa cemetery's funerary art.
   Jewish cemeteries were not modelled.
+- Open-Air Village Museum (Muzeum Wsi Lubelskiej): the buildings are own models on OSM outlines.
+  Object numbers and names come from the museum's official map; roof form, roof covering and wall
+  construction from its sector descriptions (`pipeline/skansen/objects.json`). Heights, roof pitches,
+  windows and colours are assumed. The museum does not describe the small-town buildings, so their
+  forms come from photos and names. 11 points of the museum map (e.g. beehives, the Firlej gate,
+  the market square with its well) have no OSM outline and are not modelled.
 - Outside the photogrammetry zone, buildings are LoD2 blocks with procedural facades.
 - Viaduct heights come from the surface model and may be off by a few tens of centimetres.
 
